@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   ShieldAlert, 
@@ -20,376 +20,357 @@ import {
   Cpu,
   Layers,
   ArrowUpRight,
-  Send
+  TrendingUp,
+  Sliders,
+  CheckCircle,
+  Binary
 } from 'lucide-react';
 
 export const LandingPage: React.FC = () => {
-  const [activeCardIndex, setActiveCardIndex] = useState(0);
-  const [activeDarkCard, setActiveDarkCard] = useState('clarity');
-  const [footerTheme, setFooterTheme] = useState<'dark' | 'light'>('light');
+  const [activeStep, setActiveStep] = useState(0);
 
-  const cards = [
+  // Lucid Horizontal Stepper Workflow ("Making Proof Visible")
+  const workflowSteps = [
     {
       num: '01',
-      badge: 'AI Monitoring',
-      title: 'Claim Extraction',
-      subtitle: 'Discrete Assertion Radar',
-      desc: 'Deconstructs untrusted messages into testable claims (delivery fees, urgent account freezes, spoofed identity).',
-      img: '/assets/full_card_1_proper.jpg',
-      art: '/assets/art_tree.jpg'
+      title: 'Autonomous Ingestion',
+      category: 'Stage 1 • Claim Isolation',
+      desc: 'Parses incoming SMS, email, and web lures into atomic, falsifiable assertions with complete provenance tracking and zero untrusted script execution.',
+      metric: '99.4% Parsing Purity',
+      tag: 'RFC-Compliant Ingestion',
+      icon: Binary,
+      details: [
+        'Deterministic header decomposition',
+        'Payload sanitization & safe decoding',
+        'Zero-trust RFC 1918 sandboxing'
+      ]
     },
     {
       num: '02',
-      badge: 'Forecast Engine',
       title: 'Contradiction Analysis',
-      subtitle: 'Real-Time Identity Proof',
-      desc: 'Proves authority divergence when claimed authority conflicts with destination ASN, bare IP, or malicious registrar.',
-      img: '/assets/full_card_2_proper.jpg',
-      art: '/assets/art_mountain.jpg'
+      category: 'Stage 2 • Infrastructure Audit',
+      desc: 'Correlates claimed institutional identity against destination ASN, WHOIS registrar history, TLS cipher suites, and dynamic redirect hops.',
+      metric: '100% Deterministic Mismatch',
+      tag: 'Real-Time Verification',
+      icon: Scale,
+      details: [
+        'Authority divergence detection',
+        'Lookalike typosquatting identification',
+        'Bare IP & ephemeral domain flagging'
+      ]
     },
     {
       num: '03',
-      badge: 'Smart Insights',
-      title: 'Evidence Graph',
-      subtitle: 'Interactive Forensic Network',
-      desc: 'Correlates entities, indicators, and threat intelligence in a verifiable visual graph with complete provenance.',
-      img: '/assets/full_card_3_proper.jpg',
-      art: '/assets/art_stream.jpg'
+      title: 'Evidence Graph Fusion',
+      category: 'Stage 3 • Forensics Network',
+      desc: 'Constructs an interactive multi-dimensional evidence graph binding entities, cryptographic hashes, autonomous indicators, and threat intelligence.',
+      metric: 'Multi-Node Correlation',
+      tag: 'Cryptographic Provenance',
+      icon: Network,
+      details: [
+        'Graph-theoretic link analysis',
+        'Corroborating lookup verification',
+        'Persistent database auditing'
+      ]
     },
     {
       num: '04',
-      badge: 'Response Engine',
-      title: 'Incident Containment',
-      subtitle: 'Actionable Response Playbook',
-      desc: 'Generates authenticated escalation checklists with official registry lookups and zero untrusted code execution.',
-      img: '/assets/full_card_2_proper.jpg',
-      art: '/assets/art_mountain.jpg'
+      title: 'Actionable Containment',
+      category: 'Stage 4 • Incident Remediation',
+      desc: 'Generates step-by-step verified response playbooks, registrar abuse reporting templates, and official institution confirmation checklists.',
+      metric: 'Zero Ambiguity Playbook',
+      tag: 'Verified Response Protocol',
+      icon: ShieldCheck,
+      details: [
+        'Official institution direct links',
+        'Standardized abuse contact payloads',
+        'Defensible evidentiary audit export'
+      ]
     }
   ];
 
-  const handlePrev = () => {
-    setActiveCardIndex((prev) => (prev === 0 ? cards.length - 1 : prev - 1));
+  const handlePrevStep = () => {
+    setActiveStep((prev) => (prev === 0 ? workflowSteps.length - 1 : prev - 1));
   };
 
-  const handleNext = () => {
-    setActiveCardIndex((prev) => (prev === cards.length - 1 ? 0 : prev + 1));
+  const handleNextStep = () => {
+    setActiveStep((prev) => (prev === workflowSteps.length - 1 ? 0 : prev + 1));
   };
 
   return (
-    <div className="space-y-24 pb-20 -mt-4">
+    <div className="space-y-16 pb-20 -mt-2">
       
       {/* ------------------------------------------------------------- */}
-      {/* 1. HERO SECTION: Moving Mountain Video Canvas (Like Video t=0s) */}
+      {/* 1. HERO SECTION: Lucid Ethereal Cloudscape & Floating Cards    */}
+      {/* Reference: Dribbble Lucid Video (t=0s - t=5s)                 */}
       {/* ------------------------------------------------------------- */}
-      <section className="relative w-full rounded-3xl overflow-hidden min-h-[620px] sm:min-h-[720px] flex flex-col justify-between p-6 sm:p-12 shadow-2xl border border-[#2B472F]/50">
+      <section className="relative w-full rounded-[36px] overflow-hidden min-h-[660px] sm:min-h-[740px] flex flex-col justify-between p-6 sm:p-12 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.07)] border border-white/80 bg-gradient-to-b from-[#F2ECE6] via-[#E8E1D9] to-[#DFD6CE]">
         
-        {/* Moving Background Video */}
-        <div className="bg-video-container">
+        {/* Background Celestial Loop (Soft clouds + glowing moon video) */}
+        <div className="bg-video-container opacity-60 mix-blend-multiply pointer-events-none">
           <video
             autoPlay
             loop
             muted
             playsInline
-            poster="/assets/hero_mountain_screen.jpg"
-            className="w-full h-full object-cover brightness-[0.88] contrast-[1.05]"
+            poster="/assets/lucid_hero_poster.jpg"
+            className="w-full h-full object-cover scale-105"
           >
-            <source src="/assets/hero_moving.mp4" type="video/mp4" />
+            <source src="/assets/lucid_hero_bg.mp4" type="video/mp4" />
           </video>
-          {/* Subtle gradient vignette overlay */}
-          <div className="absolute inset-0 bg-radial from-transparent via-black/30 to-black/70 pointer-events-none" />
         </div>
 
-        {/* Minimal Hero Top Sub-Nav (Exact like video: About, Features, Logo, App, Contact) */}
-        <div className="relative z-10 flex items-center justify-between text-xs font-serif tracking-widest text-[#E6E1D3]/90 pt-2">
-          <div className="flex items-center space-x-6">
-            <span className="hover:text-white transition-colors cursor-pointer">About</span>
-            <span className="hover:text-white transition-colors cursor-pointer">Features</span>
-          </div>
-          
-          <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 rounded-full bg-[#EAE5D8]/20 backdrop-blur-md border border-white/20 flex items-center justify-center">
-              <ShieldAlert className="w-4 h-4 text-[#C4DDBC]" />
-            </div>
+        {/* Ambient Celestial Glow Behind the Central Stage */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[340px] h-[340px] sm:w-[460px] sm:h-[460px] rounded-full bg-gradient-to-tr from-white/70 via-amber-100/40 to-white/90 blur-3xl pointer-events-none animate-pulse" />
+
+        {/* Lucid Hero Top Sub-Nav (Minimal pill styling) */}
+        <div className="relative z-10 flex items-center justify-between text-xs font-mono text-[#54514A]">
+          <div className="flex items-center space-x-2 bg-white/70 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/80 shadow-xs">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+            <span className="text-[11px] font-medium tracking-wide">Forensic Evidence Core Active</span>
           </div>
 
-          <div className="flex items-center space-x-6">
-            <Link to="/dashboard" className="hover:text-white transition-colors">App</Link>
-            <Link to="/investigate/new" className="hover:text-white transition-colors">Contact</Link>
+          <div className="hidden sm:flex items-center space-x-6 text-[11px] font-medium">
+            <Link to="/dashboard" className="hover:text-black transition-colors">Operations</Link>
+            <Link to="/history" className="hover:text-black transition-colors">Case Vault</Link>
+            <Link to="/settings" className="hover:text-black transition-colors">Integrations</Link>
           </div>
         </div>
 
-        {/* Center Hero Headline & Subtitle (Exact layout as "Your AI CFO") */}
-        <div className="relative z-10 text-center max-w-4xl mx-auto my-auto py-12">
+        {/* Center Hero Statement */}
+        <div className="relative z-10 text-center max-w-3xl mx-auto my-auto py-10 sm:py-14">
           
-          {/* Badge */}
-          <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-[#FAF8F5] text-xs font-mono mb-6 shadow-sm">
-            <Sparkles className="w-3.5 h-3.5 text-[#A8D3A4]" />
-            <span>AI Evidence-First Forensics Engine</span>
+          {/* Pill Badge */}
+          <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-white/80 backdrop-blur-md border border-white/90 text-[#34322D] text-xs font-mono mb-6 shadow-xs">
+            <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
+            <span>Autonomous Evidence-First Forensics</span>
           </div>
 
-          {/* Headline (Preserves required search text for E2E tests: "Investigate Suspicious Messages") */}
-          <h1 className="font-serif text-5xl sm:text-7xl lg:text-8xl font-normal tracking-tight text-[#FAF8F5] mb-6 leading-[1.04] drop-shadow-md">
+          {/* Main Headline (Preserves required test text: "Investigate Suspicious Messages") */}
+          <h1 className="font-heading text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-[#18191B] mb-5 leading-[1.08]">
             Investigate Suspicious Messages
           </h1>
 
-          <p className="font-sans text-sm sm:text-base text-[#D7DFD6] max-w-2xl mx-auto mb-10 leading-relaxed font-light drop-shadow">
-            Detect impersonation, analyze URL contradiction indicators, and uncover hidden identity fraud before damage occurs.
+          <p className="font-sans text-sm sm:text-base text-[#5E5B55] max-w-xl mx-auto mb-8 leading-relaxed font-normal">
+            Autonomous claim deconstruction, deterministic contradiction analysis, and cryptographic evidence graphs engineered to expose impersonation before damage occurs.
           </p>
 
-          {/* Hero Floating Button: "Start Investigation" (Exact pill with right arrow circle) */}
+          {/* Primary Action Button ("Start Investigation" with circular arrow button) */}
           <div className="flex justify-center">
             <Link
               to="/investigate/new"
-              className="group inline-flex items-center space-x-3 pl-6 pr-2.5 py-2.5 rounded-full bg-[#FAF8F5]/90 hover:bg-[#FAF8F5] text-[#182B1B] font-serif text-sm font-medium shadow-xl backdrop-blur-md transition-all hover:scale-[1.02] cursor-pointer"
+              className="group inline-flex items-center space-x-3 pl-6 pr-2.5 py-2.5 rounded-full bg-[#18191B] hover:bg-black text-white text-xs font-medium shadow-xl hover:shadow-2xl transition-all hover:scale-[1.02] cursor-pointer"
             >
-              <span>Start Investigation</span>
-              <div className="w-8 h-8 rounded-full bg-[#182B1B] text-[#FAF8F5] flex items-center justify-center group-hover:translate-x-0.5 transition-transform">
+              <span className="tracking-wide">Start Investigation</span>
+              <div className="w-7 h-7 rounded-full bg-white/20 text-white flex items-center justify-center group-hover:translate-x-0.5 transition-transform">
                 <ChevronRight className="w-4 h-4" />
               </div>
             </Link>
           </div>
         </div>
 
-        {/* Hero Bottom Telemetry Strip */}
-        <div className="relative z-10 flex flex-col sm:flex-row items-center justify-between text-xs font-mono text-[#D7DFD6]/80 pt-4 border-t border-white/10 gap-2">
-          <div className="flex items-center space-x-2">
-            <span className="w-2 h-2 rounded-full bg-[#52D172] animate-pulse" />
-            <span>Autonomous Evidence Correlation: Online</span>
+        {/* Bottom Floating Glass Statistic Cards (Directly matching Lucid Video Cards) */}
+        <div className="relative z-10 grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4">
+          
+          {/* Card 1: Extraction Precision */}
+          <div className="lucid-glass-card rounded-2xl p-4 sm:p-5 flex flex-col justify-between">
+            <div className="flex items-center justify-between text-xs text-[#6B6862]">
+              <span className="font-mono text-[11px] uppercase tracking-wider">Discrete Claim Radar</span>
+              <FileCheck2 className="w-4 h-4 text-emerald-600" />
+            </div>
+            <div className="my-3 flex items-baseline gap-2">
+              <span className="font-heading text-3xl sm:text-4xl font-bold text-[#18191B]">98.2%</span>
+              <span className="text-[11px] font-mono text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-100">Verified</span>
+            </div>
+            <div className="text-[11px] text-[#6B6862] font-sans flex items-center justify-between border-t border-[#EAE6DE] pt-2">
+              <span>Isolated Assertions</span>
+              <span className="font-mono text-[#18191B]">Deterministic</span>
+            </div>
           </div>
-          <div>SSRF Isolation Active • Zero Untrusted Code Exec</div>
+
+          {/* Card 2: Contradiction Engine */}
+          <div className="lucid-glass-card rounded-2xl p-4 sm:p-5 flex flex-col justify-between">
+            <div className="flex items-center justify-between text-xs text-[#6B6862]">
+              <span className="font-mono text-[11px] uppercase tracking-wider">Authority Divergence</span>
+              <Scale className="w-4 h-4 text-amber-600" />
+            </div>
+            <div className="my-3 flex items-baseline gap-2">
+              <span className="font-heading text-3xl sm:text-4xl font-bold text-[#18191B]">100%</span>
+              <span className="text-[11px] font-mono text-amber-800 bg-amber-50 px-2 py-0.5 rounded-full border border-amber-100">Proven Mismatch</span>
+            </div>
+            <div className="text-[11px] text-[#6B6862] font-sans flex items-center justify-between border-t border-[#EAE6DE] pt-2">
+              <span>ASN & WHOIS Mismatch</span>
+              <span className="font-mono text-[#18191B]">Cryptographic</span>
+            </div>
+          </div>
+
+          {/* Card 3: Evidence Graph Depth */}
+          <div className="lucid-glass-card rounded-2xl p-4 sm:p-5 flex flex-col justify-between">
+            <div className="flex items-center justify-between text-xs text-[#6B6862]">
+              <span className="font-mono text-[11px] uppercase tracking-wider">Evidence Graph</span>
+              <Network className="w-4 h-4 text-indigo-600" />
+            </div>
+            <div className="my-3 flex items-baseline gap-2">
+              <span className="font-heading text-3xl sm:text-4xl font-bold text-[#18191B]">14+</span>
+              <span className="text-[11px] font-mono text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded-full border border-indigo-100">Live Nodes</span>
+            </div>
+            <div className="text-[11px] text-[#6B6862] font-sans flex items-center justify-between border-t border-[#EAE6DE] pt-2">
+              <span>Provenance Corroborated</span>
+              <span className="font-mono text-[#18191B]">PostgreSQL</span>
+            </div>
+          </div>
+
         </div>
+
       </section>
 
       {/* ------------------------------------------------------------- */}
-      {/* 2. SECTION 2: "AI-Powered Financial Visibility" (Video t=8s)   */}
-      {/* Features moving mesh background & 01/04 card carousel         */}
+      {/* 2. SECTION 2: "Making Proof Visible" Horizontal Stepper        */}
+      {/* Matching Lucid Video t=6s - 10s ("Making Recovery Visible")   */}
       {/* ------------------------------------------------------------- */}
-      <section className="relative w-full rounded-3xl overflow-hidden p-8 sm:p-16 border border-[#E4DFD3] shadow-xl">
+      <section className="w-full rounded-[36px] bg-[#E5DFD7] p-8 sm:p-14 border border-white/60 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.05)] relative overflow-hidden">
         
-        {/* Moving Topographic Mesh Background Video */}
-        <div className="bg-video-container opacity-45">
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            poster="/assets/mesh_topography.jpg"
-            className="w-full h-full object-cover"
-          >
-            <source src="/assets/mesh_moving.mp4" type="video/mp4" />
-          </video>
-        </div>
+        {/* Subtle decorative background blur */}
+        <div className="absolute top-0 right-0 w-96 h-96 bg-white/20 rounded-full blur-3xl pointer-events-none" />
 
         <div className="relative z-10">
           
-          {/* Top Pill Tag */}
-          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#EAE5D8]/80 backdrop-blur-md border border-[#DDD7C7] text-[#474235] text-xs font-serif font-medium mb-4">
-            <span>Forensic Intelligence</span>
-          </div>
-
-          {/* Section Heading */}
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-12 gap-6">
+          {/* Header Row with Title and Pill Controls */}
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-10 pb-6 border-b border-[#D4CDC3]">
             <div>
-              <h2 className="font-serif text-4xl sm:text-6xl font-normal text-[#171A1C] leading-[1.08]">
-                AI-Powered <br />
-                <span className="italic">Forensic Visibility</span>
+              <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-white/70 border border-white/80 text-[11px] font-mono text-[#54514A] mb-3">
+                <Sliders className="w-3 h-3 text-emerald-700" />
+                <span>Forensic Architecture</span>
+              </div>
+              <h2 className="font-heading text-3xl sm:text-5xl font-bold text-[#18191B] tracking-tight">
+                Making Proof Visible
               </h2>
+              <p className="text-xs sm:text-sm text-[#6B6862] mt-2 max-w-lg font-sans">
+                A deterministic four-phase pipeline turning unstructured deceptive communications into verifiable, audit-ready evidentiary proof.
+              </p>
             </div>
-            <p className="text-sm text-[#5F5849] max-w-md font-sans leading-relaxed">
-              Autonomous claim deconstruction, contradiction analysis, and live multi-layered evidence correlation designed for defensible forensic outcomes.
-            </p>
+
+            {/* Stepper Pill Controls (< > arrows) */}
+            <div className="flex items-center space-x-3">
+              <span className="text-xs font-mono text-[#6B6862] mr-2">
+                0{activeStep + 1} <span className="opacity-40">/ 04</span>
+              </span>
+              <button
+                onClick={handlePrevStep}
+                className="w-10 h-10 rounded-full bg-white hover:bg-[#F2ECE6] text-[#18191B] flex items-center justify-center shadow-xs transition-all cursor-pointer border border-[#DCD5CB]"
+                aria-label="Previous step"
+              >
+                <ChevronLeft className="w-4 h-4" />
+              </button>
+              <button
+                onClick={handleNextStep}
+                className="w-10 h-10 rounded-full bg-[#18191B] hover:bg-black text-white flex items-center justify-center shadow-xs transition-all cursor-pointer"
+                aria-label="Next step"
+              >
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            </div>
           </div>
 
-          {/* Interactive 01/04 Carousel Stage (Exact layout matching video) */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            
-            {/* Left Column: Number Step + Text + Prev/Next Controls */}
-            <div className="lg:col-span-4 space-y-6">
-              <div className="space-y-2">
-                <div className="font-serif text-5xl font-light text-[#171A1C]">
-                  {cards[activeCardIndex].num}<span className="text-[#8C8472] text-2xl font-mono">/04</span>
-                </div>
-                <h3 className="font-serif text-2xl font-bold text-[#171A1C]">
-                  {cards[activeCardIndex].title}
-                </h3>
-                <p className="text-xs text-[#5F5849] leading-relaxed font-sans">
-                  {cards[activeCardIndex].desc}
-                </p>
-              </div>
-
-              {/* Prev / Next circular buttons (Exact like video) */}
-              <div className="flex items-center space-x-3 pt-4">
+          {/* Stepper Navigation Track (01, 02, 03, 04 connected nodes) */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
+            {workflowSteps.map((step, idx) => {
+              const isActive = idx === activeStep;
+              return (
                 <button
-                  onClick={handlePrev}
-                  className="w-10 h-10 rounded-full bg-[#182B1B] text-[#FAF8F5] flex items-center justify-center hover:bg-[#253D29] transition-transform active:scale-95 cursor-pointer shadow-sm"
-                  aria-label="Previous capability"
+                  key={idx}
+                  onClick={() => setActiveStep(idx)}
+                  className={`text-left p-4 rounded-2xl transition-all cursor-pointer border ${
+                    isActive
+                      ? 'bg-white border-white shadow-md text-[#18191B]'
+                      : 'bg-white/40 border-transparent hover:bg-white/70 text-[#6B6862]'
+                  }`}
                 >
-                  <ChevronLeft className="w-5 h-5" />
-                </button>
-                <button
-                  onClick={handleNext}
-                  className="w-10 h-10 rounded-full bg-[#182B1B] text-[#FAF8F5] flex items-center justify-center hover:bg-[#253D29] transition-transform active:scale-95 cursor-pointer shadow-sm"
-                  aria-label="Next capability"
-                >
-                  <ChevronRight className="w-5 h-5" />
-                </button>
-              </div>
-            </div>
-
-            {/* Right Column: 3 Overlapping Luxury Rounded Cards (Exact video visual) */}
-            <div className="lg:col-span-8 flex gap-5 overflow-x-auto pb-4 pt-2 no-scrollbar">
-              {cards.map((card, idx) => {
-                const isActive = idx === activeCardIndex;
-                return (
-                  <div
-                    key={idx}
-                    onClick={() => setActiveCardIndex(idx)}
-                    className={`relative w-64 sm:w-72 shrink-0 rounded-3xl overflow-hidden cursor-pointer transition-all duration-500 shadow-xl border ${
-                      isActive 
-                        ? 'scale-105 border-[#2A5C37] ring-2 ring-[#2A5C37]/30' 
-                        : 'opacity-85 hover:opacity-100 border-[#E4DFD3] hover:scale-[1.02]'
-                    }`}
-                    style={{ aspectRatio: '9 / 14' }}
-                  >
-                    {/* Background card artwork image extracted from video */}
-                    <img 
-                      src={card.img} 
-                      alt={card.title} 
-                      className="absolute inset-0 w-full h-full object-cover" 
-                    />
-                    
-                    {/* Glass badge on top */}
-                    <div className="absolute top-4 left-4 z-10">
-                      <span className="px-3.5 py-1 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-[#FAF8F5] text-[11px] font-serif">
-                        {card.badge}
-                      </span>
-                    </div>
-
-                    {/* Gradient bottom overlay with title */}
-                    <div className="absolute inset-x-0 bottom-0 p-5 bg-gradient-to-t from-black/90 via-black/60 to-transparent text-white z-10">
-                      <h4 className="font-serif text-lg font-bold leading-tight mb-1">
-                        {card.title}
-                      </h4>
-                      <p className="text-[11px] text-[#D7DFD6] line-clamp-2 font-sans font-light">
-                        {card.desc}
-                      </p>
-                    </div>
+                  <div className="flex items-center justify-between mb-2">
+                    <span className={`font-mono text-xs font-bold ${isActive ? 'text-emerald-700' : 'text-[#8C8880]'}`}>
+                      {step.num}
+                    </span>
+                    {isActive && <div className="w-2 h-2 rounded-full bg-emerald-500" />}
                   </div>
-                );
-              })}
-            </div>
-
+                  <div className="font-heading text-sm font-semibold truncate">
+                    {step.title}
+                  </div>
+                </button>
+              );
+            })}
           </div>
 
-        </div>
-      </section>
-
-      {/* ------------------------------------------------------------- */}
-      {/* 3. SECTION 3: "Built For Financial Clarity" (Video t=6s)       */}
-      {/* Dark luxury stage with interactive side tabs and telemetry    */}
-      {/* ------------------------------------------------------------- */}
-      <section className="w-full rounded-3xl bg-[#0F1311] text-[#FAF8F5] p-8 sm:p-16 border border-[#2B472F] shadow-2xl relative overflow-hidden">
-        
-        {/* Subtle radial emerald background glow */}
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#1E3E26]/30 rounded-full blur-3xl pointer-events-none" />
-
-        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          
-          {/* Left Hero side of the dark stage */}
-          <div className="lg:col-span-6 space-y-8">
-            <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-[#C4DDBC] text-xs font-serif">
-              <span>Forensic Assurance</span>
-            </div>
-
-            <h2 className="font-serif text-4xl sm:text-6xl font-normal leading-[1.08] text-white">
-              Built <span className="inline-block px-3 py-1 rounded-2xl bg-[#1E3E26] border border-[#35613D] text-xs font-mono align-middle text-[#A8D3A4] -translate-y-1">AI LAB</span> For <br />
-              <span className="italic font-light">Defensible Clarity</span>
-            </h2>
-
-            <p className="text-sm text-[#A7C2A4] max-w-md font-sans leading-relaxed">
-              TrustTrace equips investigators to systematically test incoming communications, eliminate confirmation bias, and obtain concrete cryptographic evidence.
-            </p>
-
-            {/* Metric counters (Exact like video: +42%, $184K, 3.2x) */}
-            <div className="grid grid-cols-3 gap-6 pt-6 border-t border-white/10">
-              <div>
-                <div className="font-serif text-3xl sm:text-4xl font-bold text-white">100%</div>
-                <div className="text-[11px] font-mono text-[#8FA88D] mt-1">Claim Provenance</div>
-              </div>
-              <div>
-                <div className="font-serif text-3xl sm:text-4xl font-bold text-white">0</div>
-                <div className="text-[11px] font-mono text-[#8FA88D] mt-1">Untrusted Code Exec</div>
-              </div>
-              <div>
-                <div className="font-serif text-3xl sm:text-4xl font-bold text-white">4.8&times;</div>
-                <div className="text-[11px] font-mono text-[#8FA88D] mt-1">Faster Triage</div>
-              </div>
-            </div>
-          </div>
-
-          {/* Right side: 3 Stacked Luxury Cards (Exact like video cards) */}
-          <div className="lg:col-span-6 space-y-4">
+          {/* Active Step Showcase Card */}
+          <div className="bg-white rounded-3xl p-6 sm:p-10 border border-white shadow-lg grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             
-            {/* Card 1: Forensic Visibility */}
-            <div 
-              onClick={() => setActiveDarkCard('clarity')}
-              className={`p-6 rounded-2xl transition-all cursor-pointer border ${
-                activeDarkCard === 'clarity'
-                  ? 'bg-[#EAE5D8] text-[#171A1C] border-[#FAF8F5] shadow-xl'
-                  : 'bg-[#18231B] text-[#FAF8F5] border-[#2A3C2E] hover:border-[#3D5742]'
-              }`}
-            >
-              <h3 className="font-serif text-xl font-bold mb-2">Forensic Visibility</h3>
-              <p className={`text-xs leading-relaxed font-sans ${activeDarkCard === 'clarity' ? 'text-[#5F5849]' : 'text-[#8FA88D]'}`}>
-                Continuous monitoring of sender telemetry, autonomous URL structure decomposition, and live lookup cross-referencing.
+            <div className="lg:col-span-7 space-y-5">
+              <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[#F5F2EC] text-[11px] font-mono text-[#54514A]">
+                <span>{workflowSteps[activeStep].category}</span>
+              </div>
+
+              <h3 className="font-heading text-2xl sm:text-3xl font-bold text-[#18191B]">
+                {workflowSteps[activeStep].title}
+              </h3>
+
+              <p className="text-sm text-[#54514A] leading-relaxed font-sans">
+                {workflowSteps[activeStep].desc}
               </p>
-              <div className="mt-4 flex items-center justify-between text-xs font-mono">
-                <span className={activeDarkCard === 'clarity' ? 'text-[#182B1B] font-semibold' : 'text-[#A8D3A4]'}>
-                  View Telemetry &rarr;
+
+              {/* Bullet highlights */}
+              <div className="space-y-2 pt-2">
+                {workflowSteps[activeStep].details.map((detail, dIdx) => (
+                  <div key={dIdx} className="flex items-center space-x-2.5 text-xs text-[#3E3C36] font-sans">
+                    <div className="w-4 h-4 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0">
+                      <CheckCircle2 className="w-3 h-3" />
+                    </div>
+                    <span>{detail}</span>
+                  </div>
+                ))}
+              </div>
+
+              <div className="pt-4 flex items-center gap-4">
+                <Link
+                  to="/investigate/new"
+                  className="inline-flex items-center space-x-2 px-5 py-2.5 rounded-full bg-[#18191B] hover:bg-black text-white text-xs font-medium transition-all"
+                >
+                  <span>Execute This In A Case</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+                <span className="text-xs font-mono text-[#8C8880]">
+                  Status: Autonomous Live
                 </span>
-                <span className="text-[10px] uppercase tracking-wider opacity-60">Engine Tier 1</span>
               </div>
             </div>
 
-            {/* Card 2: Contradiction Engine */}
-            <div 
-              onClick={() => setActiveDarkCard('contradiction')}
-              className={`p-6 rounded-2xl transition-all cursor-pointer border ${
-                activeDarkCard === 'contradiction'
-                  ? 'bg-[#EAE5D8] text-[#171A1C] border-[#FAF8F5] shadow-xl'
-                  : 'bg-[#18231B] text-[#FAF8F5] border-[#2A3C2E] hover:border-[#3D5742]'
-              }`}
-            >
-              <h3 className="font-serif text-xl font-bold mb-2">Contradiction Engine</h3>
-              <p className={`text-xs leading-relaxed font-sans ${activeDarkCard === 'contradiction' ? 'text-[#5F5849]' : 'text-[#8FA88D]'}`}>
-                Flags direct mismatches between claimed organizational identity and destination registrar, DNS, and IP infrastructure.
-              </p>
-              <div className="mt-4 flex items-center justify-between text-xs font-mono">
-                <span className={activeDarkCard === 'contradiction' ? 'text-[#182B1B] font-semibold' : 'text-[#A8D3A4]'}>
-                  Inspect Rules &rarr;
+            {/* Right Interactive Telemetry Panel */}
+            <div className="lg:col-span-5 bg-[#F7F5F0] rounded-2xl p-6 border border-[#E5DFD7] space-y-4">
+              <div className="flex items-center justify-between pb-3 border-b border-[#E5DFD7]">
+                <span className="text-xs font-mono text-[#6B6862] uppercase tracking-wider">Verified Heuristic</span>
+                <span className="text-[11px] font-mono text-emerald-800 bg-emerald-100/70 px-2.5 py-0.5 rounded-full">
+                  {workflowSteps[activeStep].tag}
                 </span>
-                <span className="text-[10px] uppercase tracking-wider opacity-60">Engine Tier 2</span>
               </div>
-            </div>
 
-            {/* Card 3: Deterministic Scoring */}
-            <div 
-              onClick={() => setActiveDarkCard('scoring')}
-              className={`p-6 rounded-2xl transition-all cursor-pointer border ${
-                activeDarkCard === 'scoring'
-                  ? 'bg-[#EAE5D8] text-[#171A1C] border-[#FAF8F5] shadow-xl'
-                  : 'bg-[#18231B] text-[#FAF8F5] border-[#2A3C2E] hover:border-[#3D5742]'
-              }`}
-            >
-              <h3 className="font-serif text-xl font-bold mb-2">Deterministic Scoring</h3>
-              <p className={`text-xs leading-relaxed font-sans ${activeDarkCard === 'scoring' ? 'text-[#5F5849]' : 'text-[#8FA88D]'}`}>
-                Eliminates subjective blackbox probabilities: scores are transparently calculated from verified heuristics and documented rules.
-              </p>
-              <div className="mt-4 flex items-center justify-between text-xs font-mono">
-                <span className={activeDarkCard === 'scoring' ? 'text-[#182B1B] font-semibold' : 'text-[#A8D3A4]'}>
-                  View Matrix &rarr;
-                </span>
-                <span className="text-[10px] uppercase tracking-wider opacity-60">Engine Tier 3</span>
+              <div className="space-y-1">
+                <span className="text-[11px] font-mono text-[#8C8880]">Telemetry Benchmark:</span>
+                <div className="font-heading text-2xl font-bold text-[#18191B]">
+                  {workflowSteps[activeStep].metric}
+                </div>
+              </div>
+
+              <div className="p-4 rounded-xl bg-white border border-[#E5DFD7] space-y-2 text-xs font-mono text-[#54514A]">
+                <div className="flex justify-between">
+                  <span>Engine:</span>
+                  <span className="text-[#18191B] font-semibold">Mistral / Deterministic</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Input Guard:</span>
+                  <span className="text-emerald-700 font-semibold">SSRF Filtered</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Persistence:</span>
+                  <span className="text-[#18191B] font-semibold">Audit DB Logged</span>
+                </div>
               </div>
             </div>
 
@@ -399,74 +380,76 @@ export const LandingPage: React.FC = () => {
       </section>
 
       {/* ------------------------------------------------------------- */}
-      {/* 4. SECTION 4: The 6 Forensics Questions Grid                   */}
+      {/* 3. SECTION 3: The Six Defensible Forensics Questions           */}
       {/* ------------------------------------------------------------- */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <span className="text-xs font-mono uppercase tracking-widest text-[#736B59]">Defensible Methodology</span>
-          <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#171A1C] mt-1">The Six Core Forensics Questions</h2>
-          <p className="text-[#5F5849] mt-2 text-sm max-w-xl mx-auto font-sans">
-            Traditional tools give you an arbitrary "85% Scam" verdict. TrustTrace answers the questions that matter in real-world fraud investigations:
+      <section className="max-w-7xl mx-auto px-2 sm:px-4">
+        <div className="text-center mb-10">
+          <span className="text-xs font-mono uppercase tracking-widest text-[#8C8880]">Scientific Rigor</span>
+          <h2 className="font-heading text-3xl sm:text-4xl font-bold text-[#18191B] mt-1.5">
+            The Six Core Forensics Questions
+          </h2>
+          <p className="text-[#6B6862] mt-2 text-xs sm:text-sm max-w-xl mx-auto font-sans">
+            Traditional tools emit vague probabilistic scores. TrustTrace systematically delivers falsifiable evidence across every vector:
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="p-6 rounded-2xl bg-[#FAF8F5] border border-[#E4DFD3] shadow-xs hover:border-[#CCC4B2] transition-all">
-            <div className="w-10 h-10 rounded-xl bg-[#E8EFE5] text-[#245229] flex items-center justify-center mb-4 border border-[#CADBC6]">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <div className="p-6 rounded-2xl bg-white border border-[#E2DDD6] shadow-xs hover:border-[#CCC6BC] transition-all">
+            <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-800 flex items-center justify-center mb-4 border border-emerald-100">
               <FileCheck2 className="w-5 h-5" />
             </div>
-            <h3 className="font-serif text-lg font-bold text-[#171A1C] mb-2">1. Discrete Claim Extraction</h3>
-            <p className="text-xs text-[#5F5849] leading-relaxed font-sans">
-              Deconstructs untrusted communications into testable assertions (claimed package hold, urgency penalty, payment demand).
+            <h3 className="font-heading text-base font-bold text-[#18191B] mb-2">1. Discrete Claim Extraction</h3>
+            <p className="text-xs text-[#6B6862] leading-relaxed font-sans">
+              Extracts discrete claims (delivery fee penalties, urgent account freezes, spoofed identity claims) into isolated assertions.
             </p>
           </div>
 
-          <div className="p-6 rounded-2xl bg-[#FAF8F5] border border-[#E4DFD3] shadow-xs hover:border-[#CCC4B2] transition-all">
-            <div className="w-10 h-10 rounded-xl bg-[#FDEEEE] text-[#A62626] flex items-center justify-center mb-4 border border-[#F6CACA]">
+          <div className="p-6 rounded-2xl bg-white border border-[#E2DDD6] shadow-xs hover:border-[#CCC6BC] transition-all">
+            <div className="w-10 h-10 rounded-xl bg-rose-50 text-rose-800 flex items-center justify-center mb-4 border border-rose-100">
               <Scale className="w-5 h-5" />
             </div>
-            <h3 className="font-serif text-lg font-bold text-[#171A1C] mb-2">2. Contradiction Analysis</h3>
-            <p className="text-xs text-[#5F5849] leading-relaxed font-sans">
+            <h3 className="font-heading text-base font-bold text-[#18191B] mb-2">2. Contradiction Analysis</h3>
+            <p className="text-xs text-[#6B6862] leading-relaxed font-sans">
               Proves identity mismatch directly: when claimed authority is "USPS" but target destination resolves to an unauthorized ".top" or bare IP domain.
             </p>
           </div>
 
-          <div className="p-6 rounded-2xl bg-[#FAF8F5] border border-[#E4DFD3] shadow-xs hover:border-[#CCC4B2] transition-all">
-            <div className="w-10 h-10 rounded-xl bg-[#EBEBF7] text-[#343A8C] flex items-center justify-center mb-4 border border-[#D0D0EF]">
+          <div className="p-6 rounded-2xl bg-white border border-[#E2DDD6] shadow-xs hover:border-[#CCC6BC] transition-all">
+            <div className="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-800 flex items-center justify-center mb-4 border border-indigo-100">
               <Network className="w-5 h-5" />
             </div>
-            <h3 className="font-serif text-lg font-bold text-[#171A1C] mb-2">3. Evidence Correlation Graph</h3>
-            <p className="text-xs text-[#5F5849] leading-relaxed font-sans">
+            <h3 className="font-heading text-base font-bold text-[#18191B] mb-2">3. Evidence Correlation Graph</h3>
+            <p className="text-xs text-[#6B6862] leading-relaxed font-sans">
               Visual interactive graph mapping nodes between entities, claims, indicators, lookups, and contradictions.
             </p>
           </div>
 
-          <div className="p-6 rounded-2xl bg-[#FAF8F5] border border-[#E4DFD3] shadow-xs hover:border-[#CCC4B2] transition-all">
-            <div className="w-10 h-10 rounded-xl bg-[#FEF6E9] text-[#A66F17] flex items-center justify-center mb-4 border border-[#F9E2BC]">
+          <div className="p-6 rounded-2xl bg-white border border-[#E2DDD6] shadow-xs hover:border-[#CCC6BC] transition-all">
+            <div className="w-10 h-10 rounded-xl bg-amber-50 text-amber-800 flex items-center justify-center mb-4 border border-amber-100">
               <AlertTriangle className="w-5 h-5" />
             </div>
-            <h3 className="font-serif text-lg font-bold text-[#171A1C] mb-2">4. Transparent Risk Scoring</h3>
-            <p className="text-xs text-[#5F5849] leading-relaxed font-sans">
+            <h3 className="font-heading text-base font-bold text-[#18191B] mb-2">4. Transparent Risk Scoring</h3>
+            <p className="text-xs text-[#6B6862] leading-relaxed font-sans">
               Documented, deterministic severity weights and evidence confidence coverage rather than an unverifiable black box.
             </p>
           </div>
 
-          <div className="p-6 rounded-2xl bg-[#FAF8F5] border border-[#E4DFD3] shadow-xs hover:border-[#CCC4B2] transition-all">
-            <div className="w-10 h-10 rounded-xl bg-[#E8F4F8] text-[#1B637B] flex items-center justify-center mb-4 border border-[#C5E4EF]">
+          <div className="p-6 rounded-2xl bg-white border border-[#E2DDD6] shadow-xs hover:border-[#CCC6BC] transition-all">
+            <div className="w-10 h-10 rounded-xl bg-sky-50 text-sky-800 flex items-center justify-center mb-4 border border-sky-100">
               <HelpCircle className="w-5 h-5" />
             </div>
-            <h3 className="font-serif text-lg font-bold text-[#171A1C] mb-2">5. Honest Uncertainty Reporting</h3>
-            <p className="text-xs text-[#5F5849] leading-relaxed font-sans">
+            <h3 className="font-heading text-base font-bold text-[#18191B] mb-2">5. Honest Uncertainty Reporting</h3>
+            <p className="text-xs text-[#6B6862] leading-relaxed font-sans">
               Explicitly categorizes what remains unverified. Absence of a threat-intel match is never misrepresented as proof of safety.
             </p>
           </div>
 
-          <div className="p-6 rounded-2xl bg-[#FAF8F5] border border-[#E4DFD3] shadow-xs hover:border-[#CCC4B2] transition-all">
-            <div className="w-10 h-10 rounded-xl bg-[#E5F3EB] text-[#185E34] flex items-center justify-center mb-4 border border-[#BEDECB]">
+          <div className="p-6 rounded-2xl bg-white border border-[#E2DDD6] shadow-xs hover:border-[#CCC6BC] transition-all">
+            <div className="w-10 h-10 rounded-xl bg-teal-50 text-teal-800 flex items-center justify-center mb-4 border border-teal-100">
               <Lock className="w-5 h-5" />
             </div>
-            <h3 className="font-serif text-lg font-bold text-[#171A1C] mb-2">6. Actionable Response Playbook</h3>
-            <p className="text-xs text-[#5F5849] leading-relaxed font-sans">
+            <h3 className="font-heading text-base font-bold text-[#18191B] mb-2">6. Actionable Response Playbook</h3>
+            <p className="text-xs text-[#6B6862] leading-relaxed font-sans">
               Generates personalized verification checklists linked to exact findings, including independent official channel verification and incident response steps.
             </p>
           </div>
@@ -474,114 +457,38 @@ export const LandingPage: React.FC = () => {
       </section>
 
       {/* ------------------------------------------------------------- */}
-      {/* 5. SECTION 5: "See Beyond The Numbers" (Video t=13s - 17s)     */}
-      {/* Moving Golden Mountain Canvas + Email Intake + Dark/Light Sw  */}
+      {/* 4. SECTION 4: Final Assurance Hero Container                   */}
       {/* ------------------------------------------------------------- */}
-      <section className="relative w-full rounded-3xl overflow-hidden p-8 sm:p-16 border border-[#E4DFD3] shadow-2xl min-h-[580px] flex flex-col justify-between">
-        
-        {/* Moving Background Video for Footer Stage */}
-        <div className="bg-video-container">
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            poster={footerTheme === 'light' ? '/assets/footer_gold_screen.jpg' : '/assets/footer_dark_screen.jpg'}
-            className="w-full h-full object-cover brightness-[0.88] contrast-[1.05]"
+      <section className="relative w-full rounded-[36px] overflow-hidden p-8 sm:p-14 border border-white bg-gradient-to-tr from-[#E6E0D8] to-[#F2ECE6] shadow-xl flex flex-col md:flex-row items-center justify-between gap-8">
+        <div className="space-y-4 max-w-xl">
+          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-white text-[11px] font-mono text-[#54514A]">
+            <ShieldAlert className="w-3.5 h-3.5 text-emerald-700" />
+            <span>Ready for Immediate Deployment</span>
+          </div>
+          <h2 className="font-heading text-3xl sm:text-4xl font-bold text-[#18191B] tracking-tight">
+            Begin Investigating Suspicious Incidents Now
+          </h2>
+          <p className="text-xs sm:text-sm text-[#6B6862] font-sans leading-relaxed">
+            Run an authenticated triage, dissect untrusted claims, and establish incontrovertible evidence in seconds.
+          </p>
+        </div>
+
+        <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0">
+          <Link
+            to="/investigate/new"
+            className="px-6 py-3 rounded-full bg-[#18191B] hover:bg-black text-white text-xs font-semibold shadow-lg hover:shadow-xl transition-all cursor-pointer"
           >
-            <source src="/assets/footer_moving.mp4" type="video/mp4" />
-          </video>
-          <div className="absolute inset-0 bg-radial from-transparent via-black/30 to-black/75 pointer-events-none" />
+            Launch Investigation
+          </Link>
+          <Link
+            to="/dashboard"
+            className="px-6 py-3 rounded-full bg-white hover:bg-[#F7F5F0] text-[#18191B] text-xs font-semibold border border-[#DDD7CD] shadow-xs transition-all cursor-pointer"
+          >
+            Open Operations
+          </Link>
         </div>
-
-        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          
-          {/* Left: See Beyond The Evidence + Email Input Pill */}
-          <div className="lg:col-span-7 space-y-6">
-            <h2 className="font-serif text-4xl sm:text-6xl font-normal text-[#FAF8F5] leading-tight">
-              See Beyond The <br />
-              <span className="italic">Evidence</span>
-            </h2>
-
-            {/* Email Intake Pill Container (Exact layout from video: "Enter your email" + "Contact us") */}
-            <div className="max-w-md bg-black/40 backdrop-blur-md border border-white/20 rounded-full p-1.5 flex items-center justify-between shadow-xl">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="bg-transparent px-4 py-2 text-xs text-white placeholder-white/60 focus:outline-hidden w-full font-sans"
-              />
-              <button
-                type="button"
-                className="px-5 py-2.5 rounded-full bg-[#EAE5D8] hover:bg-white text-[#182B1B] text-xs font-serif font-medium transition-all shrink-0 cursor-pointer shadow-sm"
-              >
-                Contact us
-              </button>
-            </div>
-          </div>
-
-          {/* Right: Two Column Links (Overview, Risk Detection, Forecast, etc.) */}
-          <div className="lg:col-span-5 space-y-6 text-xs text-[#FAF8F5]/80 font-serif">
-            <p className="font-sans text-xs text-[#D7DFD6] leading-relaxed mb-4">
-              Predict deceptive vector evolution, monitor infrastructure risks, and uncover hidden fraud before financial damage impacts growth.
-            </p>
-            
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-2.5">
-                <div className="hover:text-white cursor-pointer transition-colors">Overview</div>
-                <div className="hover:text-white cursor-pointer transition-colors">Risk Detection</div>
-                <div className="hover:text-white cursor-pointer transition-colors">Forecasting</div>
-                <div className="hover:text-white cursor-pointer transition-colors">AI Forensics</div>
-              </div>
-              <div className="space-y-2.5">
-                <div className="hover:text-white cursor-pointer transition-colors">Telemetry Analysis</div>
-                <div className="hover:text-white cursor-pointer transition-colors">Activity Graph</div>
-                <div className="hover:text-white cursor-pointer transition-colors">AI Insights</div>
-                <div className="hover:text-white cursor-pointer transition-colors">Playbook Planning</div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-        {/* Bottom Strip: Privacy Policy + Dark/Light Switch + Copyright (Exact like video) */}
-        <div className="relative z-10 pt-16 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between text-xs text-[#D7DFD6]/80 font-sans gap-4">
-          <div className="flex items-center space-x-4 text-[11px]">
-            <span className="hover:text-white cursor-pointer">Privacy Policy</span>
-            <span>•</span>
-            <span className="hover:text-white cursor-pointer">Terms of Service</span>
-            <span>•</span>
-            <span className="hover:text-white cursor-pointer">Cookie Policy</span>
-          </div>
-
-          {/* Dark / Light Pill Switch (Exact like video) */}
-          <div className="flex items-center space-x-2 bg-black/40 backdrop-blur-md px-3 py-1 rounded-full border border-white/20">
-            <span className="text-[11px] font-mono text-white/70">Dark</span>
-            <button
-              onClick={() => setFooterTheme((prev) => (prev === 'light' ? 'dark' : 'light'))}
-              className={`w-9 h-5 rounded-full p-0.5 transition-colors cursor-pointer flex items-center ${
-                footerTheme === 'light' ? 'bg-[#EAE5D8] justify-end' : 'bg-[#182B1B] justify-start'
-              }`}
-            >
-              <div className="w-4 h-4 rounded-full bg-white shadow-xs" />
-            </button>
-            <span className="text-[11px] font-mono text-white">Light</span>
-          </div>
-
-          <div className="text-[11px] font-mono">
-            &copy; 2026 TrustTrace AI. All rights reserved.
-          </div>
-        </div>
-
-        {/* Oversized Brand Watermark (Exact like video: giant KASHFLOW -> TRUSTTRACE) */}
-        <div className="relative z-10 pt-8 text-center select-none opacity-40">
-          <span className="font-serif text-7xl sm:text-9xl font-bold tracking-tight text-white/30 drop-shadow-xl">
-            TRUSTTRACE
-          </span>
-        </div>
-
       </section>
 
     </div>
   );
 };
-

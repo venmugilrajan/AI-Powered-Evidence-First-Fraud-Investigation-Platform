@@ -47,3 +47,6 @@ Thumbs.db
 .env.*.local
 *.pem
 *.key
+
+ref_video2.mp4
+video2_frames/

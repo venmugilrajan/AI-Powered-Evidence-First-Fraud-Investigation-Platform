@@ -42,19 +42,19 @@ export const Navbar: React.FC = () => {
   return (
     <header className="sticky top-4 z-50 px-4 sm:px-6 lg:px-8 mb-6">
       <div className="max-w-7xl mx-auto">
-        <div className="bg-[#FAF8F5]/90 backdrop-blur-md border border-[#E4DFD3] rounded-full px-5 py-2.5 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] flex items-center justify-between transition-all">
+        <div className="bg-white/80 backdrop-blur-xl border border-white/90 rounded-full px-5 py-2.5 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.06)] flex items-center justify-between transition-all">
           
           {/* Brand Logo & Editorial Title */}
           <div className="flex items-center space-x-6">
-            <Link to="/" className="flex items-center space-x-2.5 group">
-              <div className="w-9 h-9 rounded-full bg-[#182B1B] text-[#E7E2D4] flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform">
-                <ShieldAlert className="w-4 h-4 text-[#C4DDBC]" />
+            <Link to="/" className="flex items-center space-x-3 group">
+              <div className="w-8 h-8 rounded-full bg-[#18191B] text-white flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform">
+                <ShieldAlert className="w-4 h-4 text-emerald-400" />
               </div>
               <div className="flex flex-col">
-                <span className="font-serif text-lg font-bold tracking-tight text-[#171A1C] leading-none">
+                <span className="font-heading text-lg font-bold tracking-tight text-[#18191B] leading-none">
                   TrustTrace
                 </span>
-                <span className="text-[10px] tracking-widest uppercase font-mono text-[#7D7667] mt-0.5">
+                <span className="text-[9px] tracking-widest uppercase font-mono text-[#8C8880] mt-0.5">
                   Forensic AI
                 </span>
               </div>
@@ -62,7 +62,7 @@ export const Navbar: React.FC = () => {
 
             {/* Nav Menu for Authenticated Users */}
             {token && (
-              <nav className="hidden md:flex items-center space-x-1 pl-4 border-l border-[#E2DDCF]">
+              <nav className="hidden md:flex items-center space-x-1 pl-4 border-l border-[#E5E0D8]">
                 {navItems.map((item) => {
                   const Icon = item.icon;
                   const isActive = location.pathname === item.path;
@@ -72,8 +72,8 @@ export const Navbar: React.FC = () => {
                       to={item.path}
                       className={`flex items-center space-x-2 px-3.5 py-1.5 rounded-full text-xs font-medium transition-all ${
                         isActive
-                          ? 'bg-[#182B1B] text-[#FAF8F5] shadow-xs font-semibold'
-                          : 'text-[#5C5648] hover:text-[#182B1B] hover:bg-[#EFECE3]'
+                          ? 'bg-[#18191B] text-white shadow-xs font-semibold'
+                          : 'text-[#68655E] hover:text-[#18191B] hover:bg-[#F2EFEA]'
                       }`}
                     >
                       <Icon className="w-3.5 h-3.5" />
@@ -91,9 +91,9 @@ export const Navbar: React.FC = () => {
               <>
                 <Link
                   to="/investigate/new"
-                  className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full text-xs font-semibold bg-[#182B1B] hover:bg-[#253D29] text-[#FAF8F5] shadow-xs transition-all cursor-pointer"
+                  className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full text-xs font-semibold bg-[#18191B] hover:bg-black text-white shadow-xs transition-all cursor-pointer"
                 >
-                  <FileSearch className="w-3.5 h-3.5 text-[#C4DDBC]" />
+                  <FileSearch className="w-3.5 h-3.5 text-emerald-400" />
                   <span>Launch Case</span>
                 </Link>
                 <button
@@ -109,16 +109,16 @@ export const Navbar: React.FC = () => {
               <div className="flex items-center space-x-2">
                 <Link
                   to="/login"
-                  className="inline-flex items-center space-x-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold text-[#3D382E] hover:text-[#182B1B] hover:bg-[#EFECE3] transition-all cursor-pointer"
+                  className="inline-flex items-center space-x-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold text-[#54514A] hover:text-[#18191B] hover:bg-[#F2EFEA] transition-all cursor-pointer"
                 >
                   <LogIn className="w-3.5 h-3.5" />
                   <span>Sign In</span>
                 </Link>
                 <Link
                   to="/signup"
-                  className="inline-flex items-center space-x-1.5 px-4 py-1.5 rounded-full text-xs font-semibold bg-[#182B1B] hover:bg-[#243F29] text-[#FAF8F5] shadow-xs transition-all cursor-pointer"
+                  className="inline-flex items-center space-x-1.5 px-4 py-1.5 rounded-full text-xs font-semibold bg-[#18191B] hover:bg-black text-white shadow-xs transition-all cursor-pointer"
                 >
-                  <UserCheck className="w-3.5 h-3.5 text-[#C4DDBC]" />
+                  <UserCheck className="w-3.5 h-3.5 text-emerald-400" />
                   <span>Register</span>
                 </Link>
               </div>
