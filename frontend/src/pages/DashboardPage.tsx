@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 import { fetchDashboardStats } from '../services/api';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from 'recharts';
+import { ParticleBackground } from '../components/ParticleBackground';
 
 export const DashboardPage: React.FC = () => {
   const { data: stats, isLoading, isError } = useQuery({
@@ -83,50 +84,57 @@ export const DashboardPage: React.FC = () => {
         </div>
       </div>
 
-      {/* Metric Cards - Editorial Luxury High-Contrast Style */}
+      {/* Metric Cards - Editorial Luxury High-Contrast Style with Moving Terrain */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
         
-        <div className="p-6 rounded-2xl bg-[#182B1B] text-[#FAF8F5] border border-[#2B472F] shadow-md relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-32 h-32 bg-[#2B4E32]/20 rounded-full blur-2xl pointer-events-none" />
-          <div className="flex items-center justify-between">
-            <span className="text-[11px] font-mono uppercase tracking-wider text-[#8FA88D]">Total Ingested Cases</span>
-            <Activity className="w-4 h-4 text-[#8FA88D]" />
+        <div className="p-6 rounded-3xl bg-[#182B1B] text-[#FAF8F5] border border-[#2B472F] shadow-lg relative overflow-hidden flex flex-col justify-between min-h-[170px]">
+          {/* Animated topographical particle canvas in the lead card */}
+          <ParticleBackground theme="dark" className="opacity-45 z-0" />
+          <div className="relative z-10">
+            <div className="flex items-center justify-between">
+              <span className="text-[11px] font-mono uppercase tracking-wider text-[#8FA88D]">Total Ingested Cases</span>
+              <Activity className="w-4 h-4 text-[#8FA88D]" />
+            </div>
+            <div className="mt-4 flex items-baseline gap-2">
+              <span className="font-serif text-4xl font-bold text-white">{stats.total_investigations}</span>
+              <span className="text-xs font-mono text-[#8FA88D]">active dossiers</span>
+            </div>
           </div>
-          <div className="mt-4 flex items-baseline gap-2">
-            <span className="font-serif text-4xl font-bold text-white">{stats.total_investigations}</span>
-            <span className="text-xs font-mono text-[#8FA88D]">active dossiers</span>
-          </div>
-          <div className="mt-4 pt-3 border-t border-[#2C4830] text-[11px] font-mono text-[#A8C4A6] flex items-center justify-between">
+          <div className="relative z-10 pt-3 border-t border-[#2C4830] text-[11px] font-mono text-[#A8C4A6] flex items-center justify-between">
             <span>Persistence: Postgres DB</span>
             <span>Audited</span>
           </div>
         </div>
 
-        <div className="p-6 rounded-2xl bg-[#FAF8F5] border border-[#E4DFD3] shadow-xs">
-          <div className="flex items-center justify-between">
-            <span className="text-[11px] font-mono uppercase tracking-wider text-[#736B59]">Fully Correlated</span>
-            <CheckCircle className="w-4 h-4 text-[#245229]" />
+        <div className="p-6 rounded-3xl bg-[#FAF8F5] border border-[#E4DFD3] shadow-xs flex flex-col justify-between min-h-[170px]">
+          <div>
+            <div className="flex items-center justify-between">
+              <span className="text-[11px] font-mono uppercase tracking-wider text-[#736B59]">Fully Correlated</span>
+              <CheckCircle className="w-4 h-4 text-[#245229]" />
+            </div>
+            <div className="mt-4 flex items-baseline gap-2">
+              <span className="font-serif text-4xl font-bold text-[#171A1C]">{stats.completed_investigations}</span>
+              <span className="text-xs font-mono text-[#736B59]">completed</span>
+            </div>
           </div>
-          <div className="mt-4 flex items-baseline gap-2">
-            <span className="font-serif text-4xl font-bold text-[#171A1C]">{stats.completed_investigations}</span>
-            <span className="text-xs font-mono text-[#736B59]">completed</span>
-          </div>
-          <div className="mt-4 pt-3 border-t border-[#EAE5D8] text-[11px] font-mono text-[#5F5849] flex items-center justify-between">
+          <div className="pt-3 border-t border-[#EAE5D8] text-[11px] font-mono text-[#5F5849] flex items-center justify-between">
             <span>Evidence Graph: Built</span>
             <span>100% Provenance</span>
           </div>
         </div>
 
-        <div className="p-6 rounded-2xl bg-[#FAF8F5] border border-[#E4DFD3] shadow-xs">
-          <div className="flex items-center justify-between">
-            <span className="text-[11px] font-mono uppercase tracking-wider text-[#736B59]">In-Flight Pipeline</span>
-            <Clock className="w-4 h-4 text-[#A66F17]" />
+        <div className="p-6 rounded-3xl bg-[#FAF8F5] border border-[#E4DFD3] shadow-xs flex flex-col justify-between min-h-[170px]">
+          <div>
+            <div className="flex items-center justify-between">
+              <span className="text-[11px] font-mono uppercase tracking-wider text-[#736B59]">In-Flight Pipeline</span>
+              <Clock className="w-4 h-4 text-[#A66F17]" />
+            </div>
+            <div className="mt-4 flex items-baseline gap-2">
+              <span className="font-serif text-4xl font-bold text-[#171A1C]">{stats.analyzing_investigations}</span>
+              <span className="text-xs font-mono text-[#736B59]">scanning</span>
+            </div>
           </div>
-          <div className="mt-4 flex items-baseline gap-2">
-            <span className="font-serif text-4xl font-bold text-[#171A1C]">{stats.analyzing_investigations}</span>
-            <span className="text-xs font-mono text-[#736B59]">scanning</span>
-          </div>
-          <div className="mt-4 pt-3 border-t border-[#EAE5D8] text-[11px] font-mono text-[#5F5849] flex items-center justify-between">
+          <div className="pt-3 border-t border-[#EAE5D8] text-[11px] font-mono text-[#5F5849] flex items-center justify-between">
             <span>Async Workers</span>
             <span>Healthy</span>
           </div>
@@ -138,11 +146,11 @@ export const DashboardPage: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         
         {/* Risk Distribution Chart */}
-        <div className="p-6 rounded-2xl bg-[#FAF8F5] border border-[#E4DFD3] shadow-xs flex flex-col justify-between">
+        <div className="p-6 rounded-3xl bg-[#FAF8F5] border border-[#E4DFD3] shadow-xs flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between mb-1">
               <h3 className="font-serif text-lg font-bold text-[#171A1C]">Observed Risk Distribution</h3>
-              <span className="text-[10px] font-mono uppercase px-2 py-0.5 rounded-full bg-[#EFECE3] text-[#5F5849]">Severity Tiers</span>
+              <span className="text-[10px] font-mono uppercase px-2.5 py-0.5 rounded-full bg-[#EFECE3] text-[#5F5849] font-mono">Severity Tiers</span>
             </div>
             <p className="text-xs text-[#5F5849] mb-6 font-sans">Computed from verified indicators and contradiction severity.</p>
           </div>
@@ -156,13 +164,13 @@ export const DashboardPage: React.FC = () => {
                   contentStyle={{ 
                     backgroundColor: '#FAF8F5', 
                     borderColor: '#DDD7C7', 
-                    borderRadius: '12px', 
+                    borderRadius: '16px', 
                     color: '#171A1C', 
                     fontSize: '12px',
                     boxShadow: '0 8px 16px -4px rgba(0,0,0,0.06)' 
                   }}
                 />
-                <Bar dataKey="count" radius={[6, 6, 0, 0]}>
+                <Bar dataKey="count" radius={[8, 8, 0, 0]}>
                   {riskChartData.map((entry, index) => (
                     <Cell key={`cell-${index}`} fill={entry.color} />
                   ))}
@@ -173,10 +181,10 @@ export const DashboardPage: React.FC = () => {
         </div>
 
         {/* Common Observed Indicators */}
-        <div className="p-6 rounded-2xl bg-[#FAF8F5] border border-[#E4DFD3] shadow-xs">
+        <div className="p-6 rounded-3xl bg-[#FAF8F5] border border-[#E4DFD3] shadow-xs">
           <div className="flex items-center justify-between mb-1">
             <h3 className="font-serif text-lg font-bold text-[#171A1C]">Frequent Observed Indicators</h3>
-            <span className="text-[10px] font-mono uppercase px-2 py-0.5 rounded-full bg-[#EFECE3] text-[#5F5849]">Heuristics</span>
+            <span className="text-[10px] font-mono uppercase px-2.5 py-0.5 rounded-full bg-[#EFECE3] text-[#5F5849] font-mono">Heuristics</span>
           </div>
           <p className="text-xs text-[#5F5849] mb-4 font-sans">Most prevalent heuristics flagged across analyzed submissions.</p>
 
@@ -187,7 +195,7 @@ export const DashboardPage: React.FC = () => {
           ) : (
             <div className="space-y-2.5">
               {stats.common_indicators.map((ind, i) => (
-                <div key={i} className="flex items-center justify-between p-3 rounded-xl bg-[#F4F1EA] border border-[#E4DFD3]">
+                <div key={i} className="flex items-center justify-between p-3.5 rounded-2xl bg-[#F4F1EA] border border-[#E4DFD3]">
                   <div className="flex items-center space-x-3">
                     <span className="w-6 h-6 rounded-full bg-[#E2DDCF] text-[#3D382E] text-xs flex items-center justify-center font-mono font-semibold">
                       #{i + 1}
