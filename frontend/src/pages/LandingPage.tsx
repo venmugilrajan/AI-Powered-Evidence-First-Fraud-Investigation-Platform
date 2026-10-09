@@ -101,27 +101,13 @@ export const LandingPage: React.FC = () => {
     <div className="space-y-16 pb-20 -mt-2">
       
       {/* ------------------------------------------------------------- */}
-      {/* 1. HERO SECTION: Lucid Ethereal Cloudscape & Floating Cards    */}
-      {/* Reference: Dribbble Lucid Video (t=0s - t=5s)                 */}
+      {/* 1. HERO SECTION: Lucid Ethereal Minimal Stage                  */}
       {/* ------------------------------------------------------------- */}
-      <section className="relative w-full rounded-[36px] overflow-hidden min-h-[660px] sm:min-h-[740px] flex flex-col justify-between p-6 sm:p-12 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.07)] border border-white/80 bg-gradient-to-b from-[#F2ECE6] via-[#E8E1D9] to-[#DFD6CE]">
+      <section className="relative w-full rounded-[36px] overflow-hidden min-h-[580px] sm:min-h-[640px] flex flex-col justify-between p-6 sm:p-12 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.06)] border border-white bg-gradient-to-b from-[#F5F1EB] via-[#ECE5DC] to-[#E2D9CF]">
         
-        {/* Background Celestial Loop (Soft clouds + glowing moon video) */}
-        <div className="bg-video-container opacity-60 mix-blend-multiply pointer-events-none">
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            poster="/assets/lucid_hero_poster.jpg"
-            className="w-full h-full object-cover scale-105"
-          >
-            <source src="/assets/lucid_hero_bg.mp4" type="video/mp4" />
-          </video>
-        </div>
-
-        {/* Ambient Celestial Glow Behind the Central Stage */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[340px] h-[340px] sm:w-[460px] sm:h-[460px] rounded-full bg-gradient-to-tr from-white/70 via-amber-100/40 to-white/90 blur-3xl pointer-events-none animate-pulse" />
+        {/* Soft Ambient Radial Light - 100% Pure CSS, Zero Video / Image Artifacts */}
+        <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-[600px] h-[350px] rounded-full bg-white/60 blur-3xl pointer-events-none" />
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[400px] h-[300px] rounded-full bg-amber-50/50 blur-2xl pointer-events-none" />
 
         {/* Lucid Hero Top Sub-Nav (Minimal pill styling) */}
         <div className="relative z-10 flex items-center justify-between text-xs font-mono text-[#54514A]">
