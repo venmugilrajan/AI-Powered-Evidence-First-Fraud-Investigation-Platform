@@ -367,78 +367,115 @@ export const LandingPage: React.FC = () => {
 
       {/* ------------------------------------------------------------- */}
       {/* 3. SECTION 3: The Six Defensible Forensics Questions           */}
+      {/* Editorial Forensic Spectrum Layout (Non-grid, fluid & unique) */}
       {/* ------------------------------------------------------------- */}
       <section className="max-w-7xl mx-auto px-2 sm:px-4">
-        <div className="text-center mb-10">
-          <span className="text-xs font-mono uppercase tracking-widest text-[#8C8880]">Scientific Rigor</span>
-          <h2 className="font-heading text-3xl sm:text-4xl font-bold text-[#18191B] mt-1.5">
-            The Six Core Forensics Questions
-          </h2>
-          <p className="text-[#6B6862] mt-2 text-xs sm:text-sm max-w-xl mx-auto font-sans">
-            Traditional tools emit vague probabilistic scores. TrustTrace systematically delivers falsifiable evidence across every vector:
+        
+        {/* Section Headline */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 pb-6 border-b border-[#DCD5CB]">
+          <div>
+            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-white/80 border border-white text-[11px] font-mono text-[#54514A] mb-3 shadow-xs">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+              <span>Scientific Rigor & Defensibility</span>
+            </div>
+            <h2 className="font-heading text-3xl sm:text-5xl font-bold text-[#18191B] tracking-tight">
+              The Six Forensics Pillars
+            </h2>
+          </div>
+          <p className="text-xs sm:text-sm text-[#6B6862] max-w-md font-sans leading-relaxed">
+            Eliminating vague probabilistic guesses. Every investigative inquiry follows a structured, falsifiable proof continuum.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          <div className="p-6 rounded-2xl bg-white border border-[#E2DDD6] shadow-xs hover:border-[#CCC6BC] transition-all">
-            <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-800 flex items-center justify-center mb-4 border border-emerald-100">
-              <FileCheck2 className="w-5 h-5" />
-            </div>
-            <h3 className="font-heading text-base font-bold text-[#18191B] mb-2">1. Discrete Claim Extraction</h3>
-            <p className="text-xs text-[#6B6862] leading-relaxed font-sans">
-              Extracts discrete claims (delivery fee penalties, urgent account freezes, spoofed identity claims) into isolated assertions.
-            </p>
-          </div>
+        {/* Fluid Horizontal Editorial Spectrum (No box grid) */}
+        <div className="space-y-4">
+          {[
+            {
+              id: '01',
+              title: 'Discrete Claim Extraction',
+              category: 'Vector Deconstruction',
+              summary: 'Breaks down deceptive text, SMS lures, and urgent demands into testable assertions.',
+              verdict: 'Deterministic Isolation',
+              accent: 'text-emerald-700 bg-emerald-50 border-emerald-200'
+            },
+            {
+              id: '02',
+              title: 'Contradiction Analysis',
+              category: 'Identity Divergence',
+              summary: 'Proves authority mismatch when claimed sender brand clashes with registered ASN or bare IP.',
+              verdict: 'Provable Divergence',
+              accent: 'text-rose-700 bg-rose-50 border-rose-200'
+            },
+            {
+              id: '03',
+              title: 'Evidence Correlation Graph',
+              category: 'Network Topology',
+              summary: 'Maps interconnected entities, registrar records, cipher fingerprints, and historical lookups.',
+              verdict: 'Graph-Theoretic Integrity',
+              accent: 'text-indigo-700 bg-indigo-50 border-indigo-200'
+            },
+            {
+              id: '04',
+              title: 'Transparent Risk Scoring',
+              category: 'Algorithmic Audit',
+              summary: 'Documented, rule-based severity weights without unexplainable neural black boxes.',
+              verdict: 'Audit-Verifiable Weights',
+              accent: 'text-amber-700 bg-amber-50 border-amber-200'
+            },
+            {
+              id: '05',
+              title: 'Honest Uncertainty Reporting',
+              category: 'Negative Space Assurance',
+              summary: 'Absence of external threat flags is never misrepresented as confirmation of safety.',
+              verdict: 'Zero False Confidence',
+              accent: 'text-sky-700 bg-sky-50 border-sky-200'
+            },
+            {
+              id: '06',
+              title: 'Actionable Response Playbook',
+              category: 'Active Containment',
+              summary: 'Generates authenticated incident checklists and registrar abuse notices for immediate remediation.',
+              verdict: 'Operational Readiness',
+              accent: 'text-teal-700 bg-teal-50 border-teal-200'
+            }
+          ].map((item, idx) => (
+            <div 
+              key={idx}
+              className="group relative flex flex-col lg:flex-row lg:items-center justify-between p-5 sm:p-7 rounded-2xl bg-white/70 hover:bg-white border border-[#E8E2D8] hover:border-white hover:shadow-lg transition-all duration-300"
+            >
+              {/* Left Column: Number + Title + Category */}
+              <div className="flex items-start sm:items-center space-x-4 sm:space-x-6">
+                <span className="font-mono text-xl sm:text-2xl font-semibold text-[#8C8880] group-hover:text-[#18191B] transition-colors">
+                  {item.id}
+                </span>
+                <div>
+                  <div className="flex items-center space-x-2.5 mb-1">
+                    <span className="text-[10px] uppercase font-mono tracking-wider text-[#8C8880]">
+                      {item.category}
+                    </span>
+                  </div>
+                  <h3 className="font-heading text-lg sm:text-xl font-bold text-[#18191B] tracking-tight group-hover:translate-x-1 transition-transform">
+                    {item.title}
+                  </h3>
+                </div>
+              </div>
 
-          <div className="p-6 rounded-2xl bg-white border border-[#E2DDD6] shadow-xs hover:border-[#CCC6BC] transition-all">
-            <div className="w-10 h-10 rounded-xl bg-rose-50 text-rose-800 flex items-center justify-center mb-4 border border-rose-100">
-              <Scale className="w-5 h-5" />
-            </div>
-            <h3 className="font-heading text-base font-bold text-[#18191B] mb-2">2. Contradiction Analysis</h3>
-            <p className="text-xs text-[#6B6862] leading-relaxed font-sans">
-              Proves identity mismatch directly: when claimed authority is "USPS" but target destination resolves to an unauthorized ".top" or bare IP domain.
-            </p>
-          </div>
+              {/* Middle: Brief summary */}
+              <p className="mt-3 lg:mt-0 text-xs sm:text-sm text-[#6B6862] font-sans max-w-xl lg:px-6 leading-relaxed">
+                {item.summary}
+              </p>
 
-          <div className="p-6 rounded-2xl bg-white border border-[#E2DDD6] shadow-xs hover:border-[#CCC6BC] transition-all">
-            <div className="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-800 flex items-center justify-center mb-4 border border-indigo-100">
-              <Network className="w-5 h-5" />
+              {/* Right: Pill Badge Verdict */}
+              <div className="mt-4 lg:mt-0 flex items-center space-x-3 shrink-0">
+                <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-mono border ${item.accent}`}>
+                  {item.verdict}
+                </span>
+                <div className="w-8 h-8 rounded-full bg-[#F5F2EC] group-hover:bg-[#18191B] group-hover:text-white text-[#54514A] flex items-center justify-center transition-all">
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </div>
+              </div>
             </div>
-            <h3 className="font-heading text-base font-bold text-[#18191B] mb-2">3. Evidence Correlation Graph</h3>
-            <p className="text-xs text-[#6B6862] leading-relaxed font-sans">
-              Visual interactive graph mapping nodes between entities, claims, indicators, lookups, and contradictions.
-            </p>
-          </div>
-
-          <div className="p-6 rounded-2xl bg-white border border-[#E2DDD6] shadow-xs hover:border-[#CCC6BC] transition-all">
-            <div className="w-10 h-10 rounded-xl bg-amber-50 text-amber-800 flex items-center justify-center mb-4 border border-amber-100">
-              <AlertTriangle className="w-5 h-5" />
-            </div>
-            <h3 className="font-heading text-base font-bold text-[#18191B] mb-2">4. Transparent Risk Scoring</h3>
-            <p className="text-xs text-[#6B6862] leading-relaxed font-sans">
-              Documented, deterministic severity weights and evidence confidence coverage rather than an unverifiable black box.
-            </p>
-          </div>
-
-          <div className="p-6 rounded-2xl bg-white border border-[#E2DDD6] shadow-xs hover:border-[#CCC6BC] transition-all">
-            <div className="w-10 h-10 rounded-xl bg-sky-50 text-sky-800 flex items-center justify-center mb-4 border border-sky-100">
-              <HelpCircle className="w-5 h-5" />
-            </div>
-            <h3 className="font-heading text-base font-bold text-[#18191B] mb-2">5. Honest Uncertainty Reporting</h3>
-            <p className="text-xs text-[#6B6862] leading-relaxed font-sans">
-              Explicitly categorizes what remains unverified. Absence of a threat-intel match is never misrepresented as proof of safety.
-            </p>
-          </div>
-
-          <div className="p-6 rounded-2xl bg-white border border-[#E2DDD6] shadow-xs hover:border-[#CCC6BC] transition-all">
-            <div className="w-10 h-10 rounded-xl bg-teal-50 text-teal-800 flex items-center justify-center mb-4 border border-teal-100">
-              <Lock className="w-5 h-5" />
-            </div>
-            <h3 className="font-heading text-base font-bold text-[#18191B] mb-2">6. Actionable Response Playbook</h3>
-            <p className="text-xs text-[#6B6862] leading-relaxed font-sans">
-              Generates personalized verification checklists linked to exact findings, including independent official channel verification and incident response steps.
-            </p>
-          </div>
+          ))}
         </div>
       </section>
 
