@@ -379,19 +379,46 @@ export const InvestigationWorkspacePage: React.FC = () => {
                     const borderColor = 
                       nat === 'SUSPICIOUS' ? '#ef4444' :
                       nat === 'CONFIRMED' ? '#10b981' :
-                      nat === 'ACTIONABLE' ? '#3b82f6' : '#cbd5e1';
+                      nat === 'ACTIONABLE' ? '#3b82f6' : '#94a3b8';
+                    const nodeTitle = n.data?.title || n.data?.label || n.id;
+                    const category = n.data?.node_category || n.type || 'SIGNAL';
+                    const subtitle = n.data?.subtitle || n.data?.category || '';
+
                     return {
                       ...n,
-                      position: { x: (i % 3) * 260 + 50, y: Math.floor(i / 3) * 160 + 50 },
+                      position: { x: (i % 3) * 280 + 40, y: Math.floor(i / 3) * 170 + 40 },
+                      data: {
+                        ...n.data,
+                        label: (
+                          <div className="text-left w-full space-y-1">
+                            <div className="flex items-center justify-between gap-1 text-[9px] font-mono">
+                              <span className="font-semibold uppercase tracking-wider text-slate-500 truncate">{category}</span>
+                              <span className={`px-1.5 py-0.2 rounded font-bold uppercase text-[8px] ${
+                                nat === 'SUSPICIOUS' ? 'bg-red-100 text-red-700' :
+                                nat === 'CONFIRMED' ? 'bg-emerald-100 text-emerald-700' :
+                                nat === 'ACTIONABLE' ? 'bg-blue-100 text-blue-700' : 'bg-slate-100 text-slate-600'
+                              }`}>{nat || 'INFO'}</span>
+                            </div>
+                            <div className="font-semibold text-xs text-slate-900 leading-snug line-clamp-2">
+                              {nodeTitle}
+                            </div>
+                            {subtitle && (
+                              <div className="text-[10px] text-slate-500 font-mono truncate">
+                                {subtitle}
+                              </div>
+                            )}
+                          </div>
+                        )
+                      },
                       style: {
                         background: '#ffffff',
                         color: '#0f172a',
                         border: `2px solid ${borderColor}`,
-                        borderRadius: '8px',
+                        borderRadius: '12px',
                         padding: '12px',
                         fontSize: '11px',
-                        boxShadow: '0 2px 4px 0 rgb(0 0 0 / 0.05)',
-                        width: 230,
+                        boxShadow: '0 4px 12px -2px rgba(0, 0, 0, 0.08)',
+                        width: 250,
                         cursor: 'pointer'
                       }
                     };
