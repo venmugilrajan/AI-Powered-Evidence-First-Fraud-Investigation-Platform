@@ -1,29 +1,34 @@
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..700&family=JetBrains+Mono:wght@400;500&display=swap');
 @import "tailwindcss";
 
 @layer base {
   :root {
-    --font-heading: 'Syne', sans-serif;
-    --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-serif: 'Newsreader', Georgia, serif;
+    --font-display: 'Instrument Serif', Georgia, serif;
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
     
-    --bg-lucid: #EFECE6;
+    --bg-trajectory: #F7F9E8;
+    --bg-tint: #F3F5E4;
     --card-surface: #FFFFFF;
-    --card-pill: rgba(255, 255, 255, 0.85);
-    --border-soft: #E2DDD6;
-    --text-primary: #18191B;
-    --text-secondary: #6B6862;
-    --accent-emerald: #1B3524;
+    --text-primary: #1C2B3E;
+    --text-secondary: #334861;
+    --text-muted: #647B95;
+    --border-hairline: rgba(51, 72, 97, 0.15);
   }
 
   body {
-    background-color: #EFECE6;
-    color: #18191B;
+    background-color: #F7F9E8;
+    color: #1C2B3E;
     font-family: var(--font-sans);
   }
 
-  h1, h2, h3, .font-heading {
-    font-family: var(--font-heading);
+  h1, h2, .font-display {
+    font-family: var(--font-display);
+  }
+
+  .font-serif-editorial {
+    font-family: var(--font-serif);
   }
 }
 
@@ -72,37 +77,99 @@
   object-fit: cover;
 }
 
-/* Glowing celestial orb / moon pulse animation */
-@keyframes moonFloat {
-  0%, 100% {
-    transform: translateY(0px) scale(1);
-    box-shadow: 0 0 80px rgba(255, 255, 255, 0.45), 0 0 160px rgba(220, 230, 245, 0.25);
+/* Trajectory fine crosshair grid lines */
+.trajectory-crosshair {
+  background-image: 
+    linear-gradient(to right, rgba(51, 72, 97, 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(51, 72, 97, 0.1) 1px, transparent 1px);
+  background-size: 80px 80px;
+}
+
+/* Trajectory research card styling */
+.trajectory-card {
+  background: linear-gradient(180deg, #FBF8F3 0%, #FFFFFF 100%);
+  border: 1px solid rgba(51, 72, 97, 0.15);
+  box-shadow: 0 4px 20px -5px rgba(51, 72, 97, 0.05);
+}
+
+.trajectory-card-teal {
+  background: linear-gradient(180deg, #E6F3EE 0%, #FAFDFB 100%);
+  border: 1px solid rgba(40, 110, 85, 0.2);
+}
+
+.trajectory-card-peach {
+  background: linear-gradient(180deg, #FAF0EB 0%, #FFFDFB 100%);
+  border: 1px solid rgba(180, 110, 80, 0.2);
+}
+
+/* Trajectory Continuous Marquee Animation */
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 30s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Trajectory Floating Paper Plane Flight Arc Animation */
+@keyframes planeFloat {
+  0% {
+    transform: translate(0px, 0px) rotate(0deg);
+  }
+  25% {
+    transform: translate(12px, -8px) rotate(2deg);
   }
   50% {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 0 110px rgba(255, 255, 255, 0.65), 0 0 200px rgba(220, 230, 245, 0.35);
+    transform: translate(24px, 4px) rotate(-1deg);
+  }
+  75% {
+    transform: translate(10px, -6px) rotate(1.5deg);
+  }
+  100% {
+    transform: translate(0px, 0px) rotate(0deg);
   }
 }
 
-.animate-moon-float {
-  animation: moonFloat 8s ease-in-out infinite;
+.animate-plane-float {
+  animation: planeFloat 9s ease-in-out infinite;
 }
 
-/* Lucid glass card styling */
-.lucid-glass-card {
-  background: rgba(255, 255, 255, 0.88);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.95);
-  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.03);
+/* Trajectory Continuous Radar Scan Sweep */
+@keyframes radarSweep {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
-.lucid-glass-pill {
-  background: rgba(255, 255, 255, 0.75);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.85);
+.animate-radar-sweep {
+  animation: radarSweep 10s linear infinite;
 }
+
+/* Trajectory Platform Stage Timer Bar */
+@keyframes stageTimer {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+.animate-stage-timer {
+  animation: stageTimer 6s linear infinite;
+}
+
+
 
 
 
