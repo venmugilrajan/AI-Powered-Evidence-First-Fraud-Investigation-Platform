@@ -26,7 +26,7 @@ export const App: React.FC = () => {
       <BrowserRouter>
         <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans selection:bg-blue-100 selection:text-blue-900">
           <Navbar />
-          <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-8">
+          <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-4">
             <Routes>
               <Route path="/" element={<LandingPage />} />
               <Route path="/login" element={<LoginPage />} />
@@ -38,8 +38,46 @@ export const App: React.FC = () => {
               <Route path="/settings" element={<SettingsPage />} />
             </Routes>
           </main>
-          <footer className="border-t border-slate-200 bg-white py-6 text-center text-xs text-slate-500 font-mono shadow-inner">
-            TrustTrace • AI Evidence-First Fraud Forensics Engine • Zero Execution Untrusted Links
+
+          {/* Luxury Editorial Footer with Kashflow-inspired Watermark */}
+          <footer className="mt-20 border-t border-[#E4DFD3] bg-[#EFECE3] pt-16 pb-12 overflow-hidden relative">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 pb-12 border-b border-[#DDD7C7]">
+                <div>
+                  <h3 className="font-serif text-2xl font-bold text-[#171A1C]">TrustTrace Forensics Lab</h3>
+                  <p className="text-xs text-[#5F5849] mt-1 max-w-md font-sans">
+                    The evidence-first fraud intelligence architecture engineered for autonomous claim extraction, deterministic proof, and verifiable threat containment.
+                  </p>
+                </div>
+
+                <div className="flex items-center space-x-3 text-xs font-mono">
+                  <div className="px-3.5 py-1.5 rounded-full bg-[#FAF8F5] border border-[#DDD7C7] text-[#3D382E]">
+                    <span>Mode: Light Editorial</span>
+                  </div>
+                  <div className="px-3.5 py-1.5 rounded-full bg-[#182B1B] text-[#FAF8F5] border border-[#2B472F]">
+                    <span>API v1.4 Active</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Huge Editorial Serif Brand Watermark */}
+              <div className="pt-10 text-center select-none opacity-20">
+                <span className="font-serif text-7xl sm:text-9xl font-bold tracking-tight text-[#2B472F]">
+                  TRUSTTRACE
+                </span>
+              </div>
+
+              <div className="mt-6 flex flex-col sm:flex-row items-center justify-between text-[11px] font-mono text-[#736B59] gap-4">
+                <div>&copy; 2026 TrustTrace Systems • Zero Untrusted Code Execution Architecture</div>
+                <div className="flex items-center space-x-4">
+                  <span>SSRF Sandboxed</span>
+                  <span>•</span>
+                  <span>RFC 1918 Guard</span>
+                  <span>•</span>
+                  <span>Deterministic Scoring</span>
+                </div>
+              </div>
+            </div>
           </footer>
         </div>
       </BrowserRouter>

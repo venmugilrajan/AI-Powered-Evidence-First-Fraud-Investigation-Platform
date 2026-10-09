@@ -2,39 +2,54 @@
 
 @layer base {
   :root {
-    --background: 210 20% 98%;
-    --foreground: 222 47% 11%;
-    --card: 0 0% 100%;
-    --card-foreground: 222 47% 11%;
-    --border: 214 32% 91%;
-    --primary: 217 91% 55%;
-    --primary-foreground: 210 40% 98%;
-    --destructive: 0 84% 60%;
-    --warning: 38 92% 50%;
-    --success: 142 71% 45%;
-    --muted: 210 40% 96%;
-    --muted-foreground: 215 16% 47%;
+    --font-serif: 'Playfair Display', Georgia, Cambria, serif;
+    --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+    
+    --bg-warm: #F6F4EE;
+    --card-dark: #121614;
+    --card-surface: #FFFFFF;
+    --card-muted: #EFECE3;
+    --accent-emerald: #164E33;
+    --accent-gold: #C29B38;
   }
 
   body {
-    background-color: #f8fafc;
-    color: #0f172a;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: #F6F4EE;
+    color: #171A1C;
+    font-family: var(--font-sans);
+  }
+
+  h1, h2, .font-serif-luxury {
+    font-family: var(--font-serif);
   }
 }
 
-/* Custom crisp light scrollbars */
+/* Custom crisp luxury scrollbars */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #f1f5f9;
+  background: #EFECE3;
 }
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 3px;
+  background: #C8C2B3;
+  border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: #9D9686;
 }
+
+/* Topographic mesh gradient background */
+.luxury-topography {
+  background-image: 
+    radial-gradient(at 10% 20%, rgba(205, 222, 198, 0.35) 0px, transparent 50%),
+    radial-gradient(at 90% 10%, rgba(226, 218, 196, 0.45) 0px, transparent 50%),
+    radial-gradient(at 50% 80%, rgba(210, 225, 208, 0.3) 0px, transparent 60%);
+}
+
+.luxury-mesh-dark {
+  background: radial-gradient(circle at 50% 0%, rgba(35, 68, 48, 0.35) 0%, rgba(18, 22, 20, 0.98) 75%), #121614;
+}
+
