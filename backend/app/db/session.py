@@ -18,11 +18,20 @@ else:
     if "supabase.co" in db_url:
         engine_kwargs["connect_args"] = {"sslmode": "require", "connect_timeout": 10}
 
+try:
+    engine = create_engine(
+        db_url,
+        **engine_kwargs
+    )
+    # Test connection
+    if not db_url.startswith("sqlite"):
+        with engine.connect() as conn:
+            pass
+except Exception as e:
+    print(f"Warning: Primary database connection failed ({e}). Falling back to local SQLite database.")
+    fallback_url = "sqlite:///./trusttrace.db"
+    engine = create_engine(fallback_url, connect_args={"check_same_thread": False})
 
-engine = create_engine(
-    db_url,
-    **engine_kwargs
-)
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
