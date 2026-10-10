@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { 
   ShieldAlert, 
   LayoutDashboard, 
@@ -7,31 +7,13 @@ import {
   History, 
   Settings, 
   FileSearch,
-  LogIn,
-  LogOut,
-  UserCheck,
   Sparkles,
 } from 'lucide-react';
-import { getAuthToken, getStoredUser, clearAuthToken } from '../services/api';
 import { TrustTraceLogo } from './TrustTraceLogo';
 
 export const Navbar: React.FC = () => {
   const location = useLocation();
-  const navigate = useNavigate();
-  const [token, setToken] = useState<string | null>(getAuthToken());
-  const [user, setUser] = useState<any | null>(getStoredUser());
 
-  useEffect(() => {
-    setToken(getAuthToken());
-    setUser(getStoredUser());
-  }, [location]);
-
-  const handleLogout = () => {
-    clearAuthToken();
-    setToken(null);
-    setUser(null);
-    navigate('/login');
-  };
 
   const navItems = [
     { name: 'Dashboard', path: '/dashboard', icon: LayoutDashboard },
@@ -51,69 +33,38 @@ export const Navbar: React.FC = () => {
               <TrustTraceLogo size={36} subtitle="EVIDENCE-FIRST FORENSICS" />
             </Link>
 
-            {/* Nav Menu for Authenticated Users */}
-            {token && (
-              <nav className="hidden md:flex items-center space-x-1 pl-4 border-l border-[rgba(51,72,97,0.15)]">
-                {navItems.map((item) => {
-                  const Icon = item.icon;
-                  const isActive = location.pathname === item.path;
-                  return (
-                    <Link
-                      key={item.path}
-                      to={item.path}
-                      className={`flex items-center space-x-2 px-3.5 py-1.5 rounded-full text-xs font-medium transition-all ${
-                        isActive
-                          ? 'bg-[#1C2B3E] text-[#F7F9E8] shadow-xs font-semibold'
-                          : 'text-[#334861] hover:text-[#1C2B3E] hover:bg-black/5'
-                      }`}
-                    >
-                      <Icon className="w-3.5 h-3.5" />
-                      <span>{item.name}</span>
-                    </Link>
-                  );
-                })}
-              </nav>
-            )}
+            {/* Nav Menu permanently visible to all users */}
+            <nav className="hidden md:flex items-center space-x-1 pl-4 border-l border-[rgba(51,72,97,0.15)]">
+              {navItems.map((item) => {
+                const Icon = item.icon;
+                const isActive = location.pathname === item.path;
+                return (
+                  <Link
+                    key={item.path}
+                    to={item.path}
+                    className={`flex items-center space-x-2 px-3.5 py-1.5 rounded-full text-xs font-medium transition-all ${
+                      isActive
+                        ? 'bg-[#1C2B3E] text-[#F7F9E8] shadow-xs font-semibold'
+                        : 'text-[#334861] hover:text-[#1C2B3E] hover:bg-black/5'
+                    }`}
+                  >
+                    <Icon className="w-3.5 h-3.5" />
+                    <span>{item.name}</span>
+                  </Link>
+                );
+              })}
+            </nav>
           </div>
 
-          {/* Right Action / Auth Buttons */}
+          {/* Direct CTA Button */}
           <div className="flex items-center space-x-3">
-            {token ? (
-              <>
-                <Link
-                  to="/investigate/new"
-                  className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full text-xs font-semibold bg-[#1C2B3E] hover:bg-[#111C2A] text-[#F7F9E8] shadow-xs transition-all cursor-pointer"
-                >
-                  <FileSearch className="w-3.5 h-3.5 text-[#8CE3B0]" />
-                  <span>Launch Case</span>
-                </Link>
-                <button
-                  onClick={handleLogout}
-                  className="inline-flex items-center space-x-1 px-3 py-1.5 rounded-full text-xs font-medium text-[#526B85] hover:text-[#A62626] hover:bg-red-50 transition-all cursor-pointer"
-                  title="Sign Out"
-                >
-                  <LogOut className="w-3.5 h-3.5" />
-                  <span className="hidden sm:inline">Sign Out</span>
-                </button>
-              </>
-            ) : (
-              <div className="flex items-center space-x-2">
-                <Link
-                  to="/login"
-                  className="inline-flex items-center space-x-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold text-[#334861] hover:text-[#1C2B3E] hover:bg-black/5 transition-all cursor-pointer"
-                >
-                  <LogIn className="w-3.5 h-3.5" />
-                  <span>Sign In</span>
-                </Link>
-                <Link
-                  to="/signup"
-                  className="inline-flex items-center space-x-1.5 px-4 py-1.5 rounded-full text-xs font-semibold bg-[#1C2B3E] hover:bg-[#111C2A] text-[#F7F9E8] shadow-xs transition-all cursor-pointer"
-                >
-                  <UserCheck className="w-3.5 h-3.5 text-[#8CE3B0]" />
-                  <span>Register</span>
-                </Link>
-              </div>
-            )}
+            <Link
+              to="/investigate/new"
+              className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full text-xs font-semibold bg-[#1C2B3E] hover:bg-[#111C2A] text-[#F7F9E8] shadow-xs transition-all cursor-pointer"
+            >
+              <FileSearch className="w-3.5 h-3.5 text-[#8CE3B0]" />
+              <span>Launch Case</span>
+            </Link>
           </div>
 
         </div>
@@ -121,3 +72,4 @@ export const Navbar: React.FC = () => {
     </header>
   );
 };
+

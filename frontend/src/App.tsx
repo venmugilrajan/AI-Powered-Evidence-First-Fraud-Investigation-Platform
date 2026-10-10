@@ -6,10 +6,9 @@ import { LandingPage } from './pages/LandingPage';
 import { DashboardPage } from './pages/DashboardPage';
 import { NewInvestigationPage } from './pages/NewInvestigationPage';
 import { InvestigationWorkspacePage } from './pages/InvestigationWorkspacePage';
+import { Navigate } from 'react-router-dom';
 import { HistoryPage } from './pages/HistoryPage';
 import { SettingsPage } from './pages/SettingsPage';
-import { LoginPage } from './pages/LoginPage';
-import { SignupPage } from './pages/SignupPage';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -29,15 +28,17 @@ export const App: React.FC = () => {
           <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-4">
             <Routes>
               <Route path="/" element={<LandingPage />} />
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/signup" element={<SignupPage />} />
+              <Route path="/login" element={<Navigate to="/investigate/new" replace />} />
+              <Route path="/signup" element={<Navigate to="/investigate/new" replace />} />
               <Route path="/dashboard" element={<DashboardPage />} />
               <Route path="/investigate/new" element={<NewInvestigationPage />} />
               <Route path="/investigations/:id" element={<InvestigationWorkspacePage />} />
               <Route path="/history" element={<HistoryPage />} />
               <Route path="/settings" element={<SettingsPage />} />
+              <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
           </main>
+
 
           {/* Trajectory Research Lab Minimalist Line Footer */}
           <footer className="mt-20 border-t border-[rgba(51,72,97,0.15)] bg-[#F7F9E8] pt-16 pb-12 overflow-hidden relative">
