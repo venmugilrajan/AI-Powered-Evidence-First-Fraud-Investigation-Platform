@@ -15,6 +15,9 @@ if db_url.startswith("sqlite"):
 else:
     engine_kwargs["pool_pre_ping"] = True
     engine_kwargs["pool_recycle"] = 300
+    if "supabase.co" in db_url:
+        engine_kwargs["connect_args"] = {"sslmode": "require", "connect_timeout": 10}
+
 
 engine = create_engine(
     db_url,
