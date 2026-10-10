@@ -25,6 +25,19 @@ except Exception as e:
     from fastapi.responses import JSONResponse
     app = FastAPI(title="TrustTrace Error Fallback")
     
+    @app.get("/api/debug")
+    @app.get("/debug")
+    async def get_debug_info():
+        return JSONResponse(
+            status_code=200,
+            content={
+                "status": "error_fallback_active",
+                "error_type": type(e).__name__,
+                "details": str(e),
+                "traceback": err_trace
+            }
+        )
+    
     @app.api_route("/{path:path}", methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD", "PATCH"])
     async def catch_all_error(path: str):
         return JSONResponse(
@@ -35,6 +48,7 @@ except Exception as e:
                 "traceback": err_trace
             }
         )
+
 
 # Standard aliases expected by serverless WSGI/ASGI runtimes
 application = app
