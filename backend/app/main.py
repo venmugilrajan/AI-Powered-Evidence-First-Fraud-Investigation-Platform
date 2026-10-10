@@ -7,8 +7,11 @@ from app.api.v1 import auth, investigations
 # Enforce security validation
 settings.validate_production_security()
 
-# Automatically initialize tables in dev/sqlite mode
-Base.metadata.create_all(bind=engine)
+# Automatically initialize tables
+try:
+    Base.metadata.create_all(bind=engine)
+except Exception as e:
+    print(f"Warning: could not run Base.metadata.create_all on startup: {e}")
 
 app = FastAPI(
     title=settings.PROJECT_NAME,
