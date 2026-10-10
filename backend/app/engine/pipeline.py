@@ -140,7 +140,9 @@ class InvestigationPipeline:
             
             lookups_data = ExternalEvidenceCollector.collect_evidence(
                 entities=extracted,
-                is_demo=inv.is_demo
+                is_demo=inv.is_demo,
+                raw_text=normalized,
+                claimed_org=inp.claimed_organization or ""
             )
 
             for lkp_data in lookups_data:

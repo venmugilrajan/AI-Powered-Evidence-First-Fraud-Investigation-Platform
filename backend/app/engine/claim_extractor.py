@@ -278,12 +278,12 @@ class ClaimExtractor:
                 "extraction_source": "DETERMINISTIC_RULES"
             })
 
-        # 5. Employment / Recruitment
-        if any(w in lower for w in ["interview", "job offer", "daily salary", "part-time", "hr manager", "telegram"]):
+        # 5. Employment / Recruitment / Internship
+        if any(w in lower for w in ["interview", "job offer", "internship", "stipend", "induction", "daily salary", "part-time", "hr manager", "work from home", "telegram"]):
             claims.append({
-                "claim_text": "Recipient has been selected for a lucrative employment or task-based position.",
+                "claim_text": "Recipient has been selected for an internship or lucrative employment program.",
                 "category": "employment",
-                "rationale": "Offers monetary compensation for remote or task-based activities.",
+                "rationale": "Offers monetary compensation, stipend, or remote work activities.",
                 "confidence": 0.85,
                 "extraction_source": "DETERMINISTIC_RULES"
             })

@@ -87,12 +87,17 @@ class VerificationEngine:
                     break
 
             if not has_contradiction:
-                # Check if any lookup found malicious
+                # Check if any lookup found malicious or suspicious
                 has_malicious = any(l["status"] == "MALICIOUS" for l in lookups)
-                if has_malicious and cat in ("identity", "delivery", "financial"):
+                has_suspicious_osint = any(l["status"] == "SUSPICIOUS" for l in lookups)
+                if has_malicious and cat in ("identity", "delivery", "financial", "employment"):
                     c["status"] = "CONTRADICTED"
                     c["rationale"] = "Evidence indicates the communication and associated infrastructure are known malicious indicators."
                     c["confidence"] = 0.9
+                elif has_suspicious_osint and cat in ("identity", "employment", "financial"):
+                    c["status"] = "CONTRADICTED"
+                    c["rationale"] = "Corroborated with active public complaints and community scam reports (Reddit/Forums) flagging this recruitment or entity pattern."
+                    c["confidence"] = 0.82
                 else:
                     # By default, without authoritative independent confirmation, claim remains UNVERIFIED
                     c["status"] = "UNVERIFIED"

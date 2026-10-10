@@ -120,16 +120,33 @@ class IndicatorAnalyzer:
                     "limitations": "Small sole proprietors or freelancers may use direct UPI / P2P payment handles legitimately."
                 })
 
-        # 7. Unofficial Communication Channel for Official Business
-        if any(w in raw_text.lower() for w in ["telegram", "whatsapp me", "contact on whatsapp"]) and claimed_org:
+        # 7. Unofficial Communication Channel for Official Business / Mass Recruitment
+        has_chat_redirect = (
+            any(w in raw_text.lower() for w in ["telegram", "whatsapp me", "contact on whatsapp", "join whatsapp group", "chat.whatsapp.com"])
+            or any("whatsapp.com" in e["value"].lower() or "t.me" in e["value"].lower() for e in entities if e["entity_type"] in ("URL", "DOMAIN"))
+        )
+        if has_chat_redirect:
             indicators.append({
-                "title": "Off-Platform Communication Redirect",
+                "title": "Off-Platform Group Redirect (WhatsApp/Telegram)",
                 "category": "COMMUNICATION_ANOMALY",
                 "severity": "HIGH",
-                "description": f"Recruitment or enterprise communication redirects the recipient to an encrypted chat application (Telegram/WhatsApp) away from enterprise systems.",
+                "description": "Communication directs recipients into an informal or encrypted group (e.g. WhatsApp group link) rather than an authenticated enterprise HR portal, LMS, or corporate email domain.",
                 "detection_method": "HEURISTIC_OFFPLATFORM_CHECK",
-                "supporting_evidence": {"claimed_org": claimed_org},
-                "limitations": "Some small local businesses utilize WhatsApp for direct customer communication."
+                "supporting_evidence": {"claimed_org": claimed_org or "Unspecified Employer"},
+                "limitations": "Some small local community groups organize informal sessions via messaging links."
+            })
+
+        # 8. Unsolicited Internship / Fake Job Funnel Indicators
+        lower_txt = raw_text.lower()
+        if ("internship" in lower_txt or "selected for" in lower_txt) and ("induction" in lower_txt or "stipend" in lower_txt or "work from home" in lower_txt):
+            indicators.append({
+                "title": "Unsolicited Mass-Internship Funnel Pattern",
+                "category": "EMPLOYMENT_FRAUD_INDICATOR",
+                "severity": "HIGH",
+                "description": "Text exhibits the classic 'selected for internship' unsolicited recruitment funnel pattern with immediate same-day induction and generic stipend promises.",
+                "detection_method": "RECRUITMENT_PATTERN_HEURISTIC",
+                "supporting_evidence": {"claimed_role": "Internship Program"},
+                "limitations": "Rapid onboarding programs at legitimate bootcamps may hold scheduled open house orientations."
             })
 
         return indicators

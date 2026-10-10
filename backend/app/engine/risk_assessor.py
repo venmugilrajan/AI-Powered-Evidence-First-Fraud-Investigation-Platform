@@ -81,7 +81,7 @@ class RiskAssessor:
                 "rationale": contra.get("explanation", "")
             })
 
-        # 4. Add Confirmed External Threat Intelligence Lookups
+        # 4. Add Confirmed External Threat Intelligence and OSINT Lookups
         for lkp in lookups:
             if lkp.get("status") == "MALICIOUS":
                 lkp_pts = 35.0
@@ -95,6 +95,17 @@ class RiskAssessor:
                     "points": lkp_pts,
                     "rationale": f"Query target '{lkp.get('query_target')}' flagged as active malware/phishing by {lkp.get('provider')}."
                 })
+            elif lkp.get("status") == "SUSPICIOUS":
+                lkp_pts = 20.0
+                score += lkp_pts
+                sim_label = " [Simulated]" if lkp.get("is_simulated") else ""
+                score_breakdown.append({
+                    "type": "EXTERNAL_OSINT_EVIDENCE",
+                    "title": f"{lkp.get('provider')} Suspicious Match{sim_label}",
+                    "severity": "HIGH",
+                    "points": lkp_pts,
+                    "rationale": f"Query target '{lkp.get('query_target')}' corroborated with public fraud/scam complaints or anomalous off-platform routing."
+                })
 
         # Normalize score into [0.0, 100.0]
         normalized_score = min(100.0, max(0.0, score))
@@ -104,7 +115,7 @@ class RiskAssessor:
         total_data_points = len(unique_indicators) + len(lookups) + len(claims)
         
         # High confidence requires corroborated lookups and testable claims
-        has_confirmed_lookup = any(l.get("status") in ("MALICIOUS", "CLEAN") for l in lookups)
+        has_confirmed_lookup = any(l.get("status") in ("MALICIOUS", "CLEAN", "SUSPICIOUS") for l in lookups)
         base_confidence = min(0.60, total_data_points * 0.08)
         confidence = base_confidence + (0.35 if has_confirmed_lookup else 0.10)
         confidence = min(0.98, max(0.15, confidence))

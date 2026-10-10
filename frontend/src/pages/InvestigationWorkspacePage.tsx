@@ -663,6 +663,7 @@ export const InvestigationWorkspacePage: React.FC = () => {
                     )}
                     <span className={`text-xs px-2 py-0.5 rounded font-mono font-bold ${
                       lkp.status === 'MALICIOUS' ? 'bg-red-50 text-red-700 border border-red-200' :
+                      lkp.status === 'SUSPICIOUS' ? 'bg-orange-50 text-orange-700 border border-orange-200' :
                       lkp.status === 'CLEAN' ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' :
                       'bg-slate-100 text-slate-600 border border-slate-200'
                     }`}>
@@ -670,9 +671,79 @@ export const InvestigationWorkspacePage: React.FC = () => {
                     </span>
                   </div>
                 </div>
-                {lkp.source_reference && (
-                  <div className="text-[11px] text-slate-500 font-mono">
-                    Reference: {lkp.source_reference}
+
+                {/* Evidence Snippet / OSINT Finding */}
+                {lkp.raw_response?.matched_evidence_snippet && (
+                  <div className="p-3 bg-white rounded-md border border-slate-200 text-xs text-slate-800 space-y-1">
+                    <div className="text-[10px] font-mono text-slate-500 uppercase tracking-wider font-semibold">
+                      Matched Web/Community Evidence Snippet:
+                    </div>
+                    <p className="italic text-slate-700 leading-relaxed font-serif">
+                      "{lkp.raw_response.matched_evidence_snippet}"
+                    </p>
+                  </div>
+                )}
+
+                {/* Infrastructure finding */}
+                {lkp.raw_response?.finding && (
+                  <div className="text-xs text-slate-700 bg-white p-2.5 rounded border border-slate-200">
+                    <span className="font-semibold text-slate-900">Infrastructure Finding: </span>
+                    {lkp.raw_response.finding}
+                  </div>
+                )}
+
+                {/* Search Metadata & Source Link */}
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between text-[11px] text-slate-500 font-mono gap-1.5 pt-1 border-t border-slate-100">
+                  {lkp.source_reference ? (
+                    <div className="truncate">
+                      <span>Source Link: </span>
+                      {lkp.source_reference.startsWith('http') ? (
+                        <a 
+                          href={lkp.source_reference} 
+                          target="_blank" 
+                          rel="noreferrer noopener"
+                          className="text-blue-600 hover:text-blue-800 underline font-medium"
+                        >
+                          {lkp.source_reference}
+                        </a>
+                      ) : (
+                        <span>{lkp.source_reference}</span>
+                      )}
+                    </div>
+                  ) : <div />}
+
+                  {lkp.raw_response?.searched_engines && (
+                    <div className="text-[10px] text-slate-400 shrink-0">
+                      Engines Queried: {Array.isArray(lkp.raw_response.searched_engines) ? lkp.raw_response.searched_engines.join(', ') : lkp.raw_response.searched_engines}
+                    </div>
+                  )}
+                </div>
+
+                {/* Multi-source listings if available */}
+                {lkp.raw_response?.all_sources && lkp.raw_response.all_sources.length > 1 && (
+                  <div className="pt-2 border-t border-slate-100 space-y-1.5">
+                    <div className="text-[10px] font-mono text-slate-500 uppercase tracking-wider font-semibold">
+                      Corroborating Web Mentions:
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                      {lkp.raw_response.all_sources.map((src: any, idx: number) => (
+                        <a
+                          key={idx}
+                          href={src.url}
+                          target="_blank"
+                          rel="noreferrer noopener"
+                          className="block p-2 rounded bg-white border border-slate-200 hover:border-blue-400 hover:shadow-xs transition-all text-[11px] group"
+                        >
+                          <div className="font-semibold text-slate-800 group-hover:text-blue-600 flex items-center justify-between">
+                            <span>{src.platform}</span>
+                            <span className="text-[9px] text-blue-500">View ↗</span>
+                          </div>
+                          <p className="text-[10px] text-slate-500 line-clamp-2 mt-0.5">
+                            {src.snippet}
+                          </p>
+                        </a>
+                      ))}
+                    </div>
                   </div>
                 )}
               </div>
