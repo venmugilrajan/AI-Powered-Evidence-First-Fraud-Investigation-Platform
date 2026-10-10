@@ -41,7 +41,7 @@ export const DashboardPage: React.FC = () => {
       <div className="p-8 text-center bg-[#FDEEEE] border border-[#F6CACA] rounded-2xl max-w-xl mx-auto my-12">
         <AlertTriangle className="w-8 h-8 text-[#A62626] mx-auto mb-3" />
         <h3 className="font-serif text-lg font-bold text-[#171A1C]">Failed to connect to backend engine</h3>
-        <p className="text-xs text-[#5F5849] mt-1 font-sans">Please ensure the FastAPI service is running on port 8000.</p>
+        <p className="text-xs text-[#5F5849] mt-1 font-sans">Please ensure the backend API service is running and reachable.</p>
       </div>
     );
   }
