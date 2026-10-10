@@ -1,25 +1,13 @@
 # TrustTrace — AI-Powered Evidence-First Fraud Investigation Platform
 
 [![Live Application](https://img.shields.io/badge/Live%20Demo-Render-brightgreen?style=for-the-badge&logo=render)](https://ai-powered-evidence-first-fraud.onrender.com/)
-[![Backend API](https://img.shields.io/badge/API%20Endpoint-Active-blue?style=for-the-badge)](https://trusttrace-api-30mc.onrender.com/health)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
 
-> **Live Deployment:** [https://ai-powered-evidence-first-fraud.onrender.com/](https://ai-powered-evidence-first-fraud.onrender.com/)  
-> **Backend API Docs:** [https://trusttrace-api-30mc.onrender.com/docs](https://trusttrace-api-30mc.onrender.com/docs)
+> **Live Application:** [https://ai-powered-evidence-first-fraud.onrender.com/](https://ai-powered-evidence-first-fraud.onrender.com/)
 
 **TrustTrace** is a modern cybersecurity and digital forensics platform designed to investigate suspicious communications—such as phishing SMS (smishing), fraudulent emails, deceptive wire transfer lures, impersonated brands, and malicious URLs—before users or organizations take irreversible actions.
 
 Instead of outputting arbitrary "black-box" risk percentages, TrustTrace enforces an **evidence-first, verifiable investigation methodology**: deconstructing untrusted communications into testable factual assertions, proving authority contradictions deterministically against authoritative registries, and visualizing findings via an interactive evidence graph.
-
----
-
-## 🌐 Live Services
-
-| Service | Component | Production URL | Status |
-| :--- | :--- | :--- | :--- |
-| **Frontend Application** | React 19 + Vite Static Site | [https://ai-powered-evidence-first-fraud.onrender.com/](https://ai-powered-evidence-first-fraud.onrender.com/) | **Active (200 OK)** |
-| **Backend REST API** | FastAPI + Uvicorn Web Service | [https://trusttrace-api-30mc.onrender.com](https://trusttrace-api-30mc.onrender.com) | **Active (200 OK)** |
-| **Interactive API Docs** | Swagger / OpenAPI | [https://trusttrace-api-30mc.onrender.com/docs](https://trusttrace-api-30mc.onrender.com/docs) | **Active (200 OK)** |
 
 ---
 
