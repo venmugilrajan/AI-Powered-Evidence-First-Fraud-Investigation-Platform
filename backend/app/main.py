@@ -16,13 +16,14 @@ app = FastAPI(
     description="TrustTrace: AI-Powered Evidence-First Fraud Investigation Platform"
 )
 
-# Initialize tables safely without blocking module import
 @app.on_event("startup")
 def startup_db_check():
     try:
+        from app.db.session import engine, Base
         Base.metadata.create_all(bind=engine)
     except Exception as e:
         print(f"Warning: could not run Base.metadata.create_all on startup: {e}")
+
 
 
 app.add_middleware(
