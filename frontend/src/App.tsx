@@ -62,19 +62,19 @@ export const App: React.FC = () => {
               </div>
 
               {/* Trajectory-style Giant Brandmark */}
-              <div className="pt-10 text-center select-none opacity-10">
-                <span className="font-display text-8xl sm:text-[11rem] font-normal tracking-tight text-[#1C2B3E]">
+              <div className="pt-6 sm:pt-10 text-center select-none opacity-10 overflow-hidden">
+                <span className="font-display text-5xl xs:text-6xl sm:text-8xl md:text-[10rem] lg:text-[11rem] font-normal tracking-tight text-[#1C2B3E] block truncate">
                   TRUSTTRACE
                 </span>
               </div>
 
-              <div className="mt-6 flex flex-col sm:flex-row items-center justify-between text-[11px] font-mono text-[#6A829D] gap-4">
+              <div className="mt-6 flex flex-col sm:flex-row items-center justify-between text-[11px] font-mono text-[#6A829D] gap-4 text-center sm:text-left">
                 <div>&copy; 2026 TrustTrace Systems • The Platform for Autonomous Forensics</div>
-                <div className="flex items-center space-x-4">
+                <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
                   <span>SSRF RFC 1918 Guard</span>
-                  <span>•</span>
+                  <span className="hidden sm:inline">•</span>
                   <span>Zero Code Execution</span>
-                  <span>•</span>
+                  <span className="hidden sm:inline">•</span>
                   <span>Deterministic Proof</span>
                 </div>
               </div>

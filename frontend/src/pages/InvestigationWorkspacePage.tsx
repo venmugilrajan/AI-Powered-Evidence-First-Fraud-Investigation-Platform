@@ -174,15 +174,15 @@ export const InvestigationWorkspacePage: React.FC = () => {
         </div>
       )}
 
-      {/* Navigation Tabs */}
-      <div className="border-b border-slate-200 flex space-x-2">
+      {/* Navigation Tabs (Scrollable on Mobile) */}
+      <div className="border-b border-slate-200 flex space-x-1 sm:space-x-2 overflow-x-auto no-scrollbar pb-0.5">
         {[
-          { key: 'overview', label: 'Executive Findings', icon: FileText },
-          { key: 'graph', label: 'Evidence Graph & Provenance', icon: Network },
-          { key: 'claims', label: `Claims (${inv.claims.length})`, icon: Scale },
-          { key: 'indicators', label: `Indicators (${inv.indicators.length})`, icon: AlertTriangle },
-          { key: 'lookups', label: `External Lookups (${inv.lookups.length})`, icon: ShieldAlert },
-          { key: 'report', label: 'Dossier Report', icon: FileText }
+          { key: 'overview', label: 'Overview', fullLabel: 'Executive Findings', icon: FileText },
+          { key: 'graph', label: 'Evidence Graph', fullLabel: 'Evidence Graph & Provenance', icon: Network },
+          { key: 'claims', label: `Claims (${inv.claims.length})`, fullLabel: `Claims (${inv.claims.length})`, icon: Scale },
+          { key: 'indicators', label: `Indicators (${inv.indicators.length})`, fullLabel: `Indicators (${inv.indicators.length})`, icon: AlertTriangle },
+          { key: 'lookups', label: `Lookups (${inv.lookups.length})`, fullLabel: `External Lookups (${inv.lookups.length})`, icon: ShieldAlert },
+          { key: 'report', label: 'Dossier Report', fullLabel: 'Dossier Report', icon: FileText }
         ].map((tab) => {
           const Icon = tab.icon;
           const isActive = activeTab === tab.key;
@@ -190,13 +190,13 @@ export const InvestigationWorkspacePage: React.FC = () => {
             <button
               key={tab.key}
               onClick={() => setActiveTab(tab.key as any)}
-              className={`flex items-center space-x-2 py-3 px-4 border-b-2 text-xs font-semibold transition-colors cursor-pointer ${
+              className={`flex items-center space-x-1.5 sm:space-x-2 py-2.5 sm:py-3 px-3 sm:px-4 border-b-2 text-xs font-semibold transition-colors cursor-pointer whitespace-nowrap shrink-0 ${
                 isActive
                   ? 'border-blue-600 text-blue-600 bg-blue-50/50'
                   : 'border-transparent text-slate-500 hover:text-slate-800 hover:border-slate-300'
               }`}
             >
-              <Icon className="w-3.5 h-3.5" />
+              <Icon className="w-3.5 h-3.5 shrink-0" />
               <span>{tab.label}</span>
             </button>
           );

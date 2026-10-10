@@ -144,7 +144,7 @@ export const LandingPage: React.FC = () => {
       {/* ------------------------------------------------------------- */}
       {/* 1. HERO SECTION: Trajectory 4-Quadrant Fine-Line Stage        */}
       {/* ------------------------------------------------------------- */}
-      <section className="relative w-full rounded-none md:rounded-3xl overflow-hidden min-h-[600px] sm:min-h-[700px] flex flex-col justify-between p-6 sm:p-14 border border-[rgba(51,72,97,0.22)] bg-[#F7F9E8]">
+      <section className="relative w-full rounded-2xl md:rounded-3xl overflow-hidden min-h-[520px] sm:min-h-[640px] lg:min-h-[700px] flex flex-col justify-between p-5 sm:p-10 lg:p-14 border border-[rgba(51,72,97,0.22)] bg-[#F7F9E8]">
         
         {/* Trajectory 4-Quadrant Fine Hairline Crosshairs */}
         <div className="absolute inset-0 pointer-events-none">
@@ -166,13 +166,13 @@ export const LandingPage: React.FC = () => {
           </svg>
 
           {/* Smooth floating gliding paper plane */}
-          <div className="absolute top-[28%] left-[72%] sm:left-[78%] animate-plane-float opacity-85">
-            <svg width="68" height="68" viewBox="0 0 72 72" fill="none" className="drop-shadow-sm">
+          <div className="absolute top-[22%] sm:top-[28%] right-4 sm:left-[78%] animate-plane-float opacity-75 sm:opacity-85 pointer-events-none">
+            <svg width="48" height="48" viewBox="0 0 72 72" fill="none" className="drop-shadow-sm sm:w-[68px] sm:h-[68px]">
               <path d="M12 36 L60 16 L40 60 L32 40 Z" fill="#F7F9E8" stroke="#334861" strokeWidth="1.5" strokeLinejoin="round" />
               <path d="M60 16 L32 40" stroke="#334861" strokeWidth="1.5" />
               <path d="M32 40 L38 52 L44 40" fill="#E6EDE2" stroke="#334861" strokeWidth="1.2" />
             </svg>
-            <div className="mt-1 -ml-4 px-2 py-0.5 rounded-full bg-white/80 border border-[rgba(51,72,97,0.2)] text-[10px] font-mono text-[#334861] shadow-xs">
+            <div className="hidden sm:block mt-1 -ml-4 px-2 py-0.5 rounded-full bg-white/80 border border-[rgba(51,72,97,0.2)] text-[10px] font-mono text-[#334861] shadow-xs">
               trajectory: active vector
             </div>
           </div>
@@ -202,29 +202,29 @@ export const LandingPage: React.FC = () => {
         </div>
 
         {/* Top Eyebrow Badge (Trajectory Pill) */}
-        <div className="relative z-10 flex justify-center pt-2">
-          <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full border border-[rgba(51,72,97,0.25)] bg-white/80 text-[#334861] text-xs font-mono shadow-xs backdrop-blur-sm">
+        <div className="relative z-10 flex justify-center pt-1 sm:pt-2">
+          <div className="inline-flex items-center space-x-2 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full border border-[rgba(51,72,97,0.25)] bg-white/80 text-[#334861] text-[11px] sm:text-xs font-mono shadow-xs backdrop-blur-sm">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse" />
-            <span>The Platform for Autonomous Forensics</span>
+            <span className="truncate">The Platform for Autonomous Forensics</span>
           </div>
         </div>
 
         {/* Center Trajectory Display Headline */}
-        <div className="relative z-10 text-center max-w-4xl mx-auto my-auto py-10">
+        <div className="relative z-10 text-center max-w-4xl mx-auto my-auto py-6 sm:py-10">
           
-          <h1 className="font-display text-5xl sm:text-7xl lg:text-8xl font-normal tracking-tight text-[#1C2B3E] leading-[1.0] mb-6">
+          <h1 className="font-display text-4xl xs:text-5xl sm:text-7xl lg:text-8xl font-normal tracking-tight text-[#1C2B3E] leading-[1.05] sm:leading-[1.0] mb-4 sm:mb-6">
             Investigate Suspicious Messages
           </h1>
 
-          <p className="font-serif-editorial text-lg sm:text-2xl text-[#334861] max-w-2xl mx-auto mb-10 leading-relaxed italic font-normal">
+          <p className="font-serif-editorial text-base sm:text-xl lg:text-2xl text-[#334861] max-w-2xl mx-auto mb-6 sm:mb-10 leading-relaxed italic font-normal px-2">
             Autonomous claim deconstruction, deterministic contradiction analysis, and cryptographic evidence graphs engineered to expose impersonation before damage occurs.
           </p>
 
           {/* Primary Action Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-3 w-full max-w-xs sm:max-w-none mx-auto">
             <Link
               to="/investigate/new"
-              className="inline-flex items-center space-x-2.5 px-6 py-3 rounded-full bg-[#1C2B3E] hover:bg-[#111C2A] text-[#F7F9E8] text-xs font-mono font-medium shadow-md transition-all hover:scale-[1.02] cursor-pointer"
+              className="w-full sm:w-auto inline-flex items-center justify-center space-x-2.5 px-6 py-3 rounded-full bg-[#1C2B3E] hover:bg-[#111C2A] text-[#F7F9E8] text-xs font-mono font-medium shadow-md transition-all hover:scale-[1.02] cursor-pointer"
             >
               <span>Start Investigation</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -232,7 +232,7 @@ export const LandingPage: React.FC = () => {
 
             <Link
               to="/dashboard"
-              className="inline-flex items-center space-x-2 px-6 py-3 rounded-full bg-white hover:bg-[#F3F5E4] text-[#1C2B3E] text-xs font-mono font-medium border border-[rgba(51,72,97,0.22)] shadow-xs transition-all cursor-pointer"
+              className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 px-6 py-3 rounded-full bg-white hover:bg-[#F3F5E4] text-[#1C2B3E] text-xs font-mono font-medium border border-[rgba(51,72,97,0.22)] shadow-xs transition-all cursor-pointer"
             >
               <span>Operations Center</span>
             </Link>
