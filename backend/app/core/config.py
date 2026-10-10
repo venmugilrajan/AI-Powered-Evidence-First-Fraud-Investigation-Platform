@@ -19,16 +19,19 @@ class Settings(BaseSettings):
     SECRET_KEY: str = "trusttrace-insecure-dev-key-change-in-production-min32chars"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 7  # 7 days
     ALGORITHM: str = "HS256"
-    CORS_ORIGINS: Any = ["http://localhost:5173", "http://localhost:3000", "http://127.0.0.1:5173", "http://localhost"]
+    CORS_ORIGINS: Any = ["*"]
     
     @field_validator("CORS_ORIGINS", mode="before")
     @classmethod
     def assemble_cors_origins(cls, v: Any) -> List[str]:
         if isinstance(v, str):
+            if v == "*":
+                return ["*"]
             return [i.strip() for i in v.split(",") if i.strip()]
         elif isinstance(v, list):
             return v
-        return ["http://localhost:5173", "http://localhost:3000", "http://127.0.0.1:5173"]
+        return ["*"]
+
     DATABASE_URL: str = "sqlite:///./trusttrace.db"
     
     # AI Provider Settings ("demo" | "mistral" | "gemini" | "openai")
