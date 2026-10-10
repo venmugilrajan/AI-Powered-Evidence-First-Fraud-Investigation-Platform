@@ -14,9 +14,29 @@ for path in [
     if os.path.exists(path) and path not in sys.path:
         sys.path.insert(0, path)
 
-# Import the FastAPI application
-from app.main import app
+try:
+    # Import the FastAPI application
+    from app.main import app
+except Exception as e:
+    import traceback
+    err_trace = traceback.format_exc()
+    print(f"CRITICAL: Failed to import FastAPI application: {err_trace}", file=sys.stderr)
+    from fastapi import FastAPI
+    from fastapi.responses import JSONResponse
+    app = FastAPI(title="TrustTrace Error Fallback")
+    
+    @app.api_route("/{path:path}", methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD", "PATCH"])
+    async def catch_all_error(path: str):
+        return JSONResponse(
+            status_code=500,
+            content={
+                "error": "Backend initialization failed",
+                "details": str(e),
+                "traceback": err_trace
+            }
+        )
 
 # Standard aliases expected by serverless WSGI/ASGI runtimes
 application = app
 handler = app
+
