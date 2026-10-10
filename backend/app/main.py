@@ -34,7 +34,13 @@ app.add_middleware(
 app.include_router(auth.router, prefix=settings.API_V1_STR)
 app.include_router(investigations.router, prefix=settings.API_V1_STR)
 
+# Also mount under /v1 so if Vercel strips /api, the routes still match 100%
+app.include_router(auth.router, prefix="/v1")
+app.include_router(investigations.router, prefix="/v1")
+
 @app.get("/api/v1/health")
+@app.get("/v1/health")
+@app.get("/health")
 def health_check():
     return {
         "status": "healthy",
