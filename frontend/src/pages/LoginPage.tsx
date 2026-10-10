@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ShieldAlert, Lock, Mail, AlertCircle, ArrowRight } from 'lucide-react';
+import { Lock, Mail, AlertCircle, ArrowRight } from 'lucide-react';
 import { loginUser } from '../services/api';
+import { TrustTraceLogo } from '../components/TrustTraceLogo';
 
 export const LoginPage: React.FC = () => {
   const navigate = useNavigate();
@@ -44,13 +45,13 @@ export const LoginPage: React.FC = () => {
     <div className="min-h-[75vh] flex items-center justify-center py-10 px-4">
       <div className="max-w-md w-full bg-white/85 backdrop-blur-xl border border-white rounded-[32px] p-8 sm:p-10 shadow-[0_20px_50px_-15px_rgba(0,0,0,0.06)] space-y-6">
         
-        {/* Header with pill logo and Syne heading */}
+        {/* Header with professional logo */}
         <div className="text-center space-y-2">
-          <div className="inline-flex p-3 bg-[#EFECE6] border border-[#DDD7CD] rounded-2xl text-[#18191B] mb-1">
-            <ShieldAlert className="w-6 h-6 text-emerald-600" />
+          <div className="flex justify-center mb-2">
+            <TrustTraceLogo size={42} withText={false} />
           </div>
           <h1 className="font-heading text-2xl sm:text-3xl font-bold tracking-tight text-[#18191B]">
-            Sign in to TrustTrace
+            Sign in to Trust<span className="text-[#059669]">Trace</span>
           </h1>
           <p className="text-xs text-[#6B6862] font-sans">
             Access secure fraud investigation dossiers, telemetry & evidence graphs

@@ -10,9 +10,10 @@ import {
   LogIn,
   LogOut,
   UserCheck,
-  Sparkles
+  Sparkles,
 } from 'lucide-react';
 import { getAuthToken, getStoredUser, clearAuthToken } from '../services/api';
+import { TrustTraceLogo } from './TrustTraceLogo';
 
 export const Navbar: React.FC = () => {
   const location = useLocation();
@@ -46,18 +47,8 @@ export const Navbar: React.FC = () => {
           
           {/* Brand Logo & Editorial Title */}
           <div className="flex items-center space-x-6">
-            <Link to="/" className="flex items-center space-x-3 group">
-              <div className="w-8 h-8 rounded-full bg-[#1C2B3E] text-[#F7F9E8] flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform">
-                <ShieldAlert className="w-4 h-4 text-[#8CE3B0]" />
-              </div>
-              <div className="flex flex-col">
-                <span className="font-display text-xl font-normal tracking-tight text-[#1C2B3E] leading-none">
-                  TrustTrace
-                </span>
-                <span className="text-[9px] tracking-widest uppercase font-mono text-[#526B85] mt-0.5">
-                  Continual Forensics
-                </span>
-              </div>
+            <Link to="/" className="group focus:outline-none">
+              <TrustTraceLogo size={36} subtitle="EVIDENCE-FIRST FORENSICS" />
             </Link>
 
             {/* Nav Menu for Authenticated Users */}
