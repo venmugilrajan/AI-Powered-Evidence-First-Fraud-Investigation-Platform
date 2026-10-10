@@ -6,7 +6,8 @@ import type {
   IntegrationStatus,
 } from '../types';
 
-const API_BASE = (import.meta.env.VITE_API_BASE || '').replace(/\/$/, '') + '/api/v1';
+const API_BASE = (import.meta.env.VITE_API_BASE || 'https://trusttrace-api-30mc.onrender.com').replace(/\/$/, '') + '/api/v1';
+
 
 export function getAuthToken(): string | null {
   return localStorage.getItem('trusttrace_token') || sessionStorage.getItem('trusttrace_token');
