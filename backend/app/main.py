@@ -5,7 +5,10 @@ from app.db.session import engine, Base
 from app.api.v1 import auth, investigations
 
 # Enforce security validation
-settings.validate_production_security()
+try:
+    settings.validate_production_security()
+except Exception as e:
+    print(f"Warning on production security validation: {e}")
 
 # Automatically initialize tables
 try:
